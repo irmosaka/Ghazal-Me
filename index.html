@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عشق من و غزال 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose: #e11d48;
+      --rose-light: #fb7185;
+      --pink: #fce7f3;
+      --cream: #fff1f2;
+      --deep: #9f1239;
+      --gold: #fbbf24;
+      --text: #4c0519;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background: linear-gradient(135deg, #fff1f2 0%, #fce7f3 40%, #fdf2f8 70%, #fff7ed 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+      color: var(--text);
+    }
+
+    /* Floating hearts background */
+    .hearts-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 1.2rem;
+      opacity: 0.25;
+      animation: floatHeart linear infinite;
+      color: var(--rose-light);
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.6);
+        opacity: 0;
+      }
+      10% { opacity: 0.35; }
+      90% { opacity: 0.2; }
+      100% {
+        transform: translateY(-20vh) rotate(360deg) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 640px;
+      width: 92%;
+      text-align: center;
+      padding: 2.5rem 1.8rem;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(18px);
+      border-radius: 28px;
+      box-shadow:
+        0 25px 50px -12px rgba(225, 29, 72, 0.18),
+        0 0 0 1px rgba(251, 113, 133, 0.2);
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.4rem, 8vw, 3.6rem);
+      color: var(--rose);
+      margin-bottom: 0.3rem;
+      text-shadow: 0 2px 12px rgba(225, 29, 72, 0.25);
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--deep);
+      opacity: 0.85;
+      margin-bottom: 1.8rem;
+      line-height: 1.7;
+    }
+
+    .dates-box {
+      background: linear-gradient(135deg, #fff1f2, #fce7f3);
+      border-radius: 18px;
+      padding: 1.1rem 1.4rem;
+      margin-bottom: 1.8rem;
+      border: 1px solid rgba(251, 113, 133, 0.25);
+    }
+
+    .dates-box p {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--deep);
+    }
+
+    .dates-box .miladi {
+      font-weight: 600;
+      color: var(--rose);
+    }
+
+    .dates-box .shamsi {
+      font-weight: 600;
+      color: var(--deep);
+    }
+
+    .counter-label {
+      font-size: 1rem;
+      color: var(--deep);
+      opacity: 0.8;
+      margin-bottom: 0.6rem;
+    }
+
+    .duration {
+      font-size: clamp(1.6rem, 5.5vw, 2.15rem);
+      font-weight: 700;
+      color: var(--rose);
+      line-height: 1.5;
+      min-height: 3.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+      padding: 0.5rem 0;
+    }
+
+    .duration span {
+      display: inline-block;
+      animation: pulseSoft 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseSoft {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    .heart-icon {
+      font-size: 1.5rem;
+      animation: heartbeat 1.4s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.25); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.15); }
+      60% { transform: scale(1); }
+    }
+
+    .poem {
+      margin-top: 2rem;
+      padding-top: 1.6rem;
+      border-top: 1px dashed rgba(225, 29, 72, 0.25);
+      font-size: 0.98rem;
+      line-height: 2;
+      color: var(--deep);
+      opacity: 0.9;
+      font-weight: 400;
+    }
+
+    .poem .line {
+      display: block;
+    }
+
+    .footer {
+      margin-top: 1.8rem;
+      font-size: 0.82rem;
+      color: var(--rose-light);
+      opacity: 0.75;
+    }
+
+    .names {
+      font-weight: 600;
+      color: var(--rose);
+      font-size: 1.15rem;
+      margin-top: 0.4rem;
+    }
+
+    /* Decorative elements */
+    .deco {
+      position: absolute;
+      font-size: 1.8rem;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .deco.top-left { top: 18px; right: 22px; }
+    .deco.top-right { top: 18px; left: 22px; }
+    .deco.bottom-left { bottom: 18px; right: 22px; }
+    .deco.bottom-right { bottom: 18px; left: 22px; }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 2rem 1.3rem;
+      }
+      .poem {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts-bg" id="hearts"></div>
+
+  <div class="container">
+    <div class="deco top-left">🌸</div>
+    <div class="deco top-right">🌸</div>
+    <div class="deco bottom-left">✨</div>
+    <div class="deco bottom-right">✨</div>
+
+    <h1 class="title">عشق ما</h1>
+    <p class="subtitle">
+      از روزی که قلب‌هامون به هم گره خورد...<br>
+      هر لحظه با تو، قصه‌ی قشنگ‌تری می‌شه
+    </p>
+
+    <div class="dates-box">
+      <p>
+        شروع رابطه:<br>
+        <span class="miladi">۱۰ ژوئن ۲۰۲۶</span>
+        &nbsp;•&nbsp;
+        <span class="shamsi">۲۰ خرداد ۱۴۰۵</span>
+      </p>
+    </div>
+
+    <p class="counter-label">تا این لحظه گذشته:</p>
+    <div class="duration" id="duration">
+      <span class="heart-icon">❤️</span>
+      <span id="time-text">در حال محاسبه...</span>
+      <span class="heart-icon">❤️</span>
+    </div>
+
+    <div class="poem">
+      <span class="line">هر روز که با تو می‌گذره،</span>
+      <span class="line">مثل ستاره‌ای به آسمون عشقمون اضافه می‌شه.</span>
+      <span class="line">غزال جان، ممنونم که هستی... 💕</span>
+    </div>
+
+    <div class="footer">
+      ساخته شده با عشق برای
+      <div class="names">من و غزال</div>
+    </div>
+  </div>
+
+  <script>
+    // تاریخ شروع رابطه (UTC برای دقت بیشتر)
+    const startDate = new Date(Date.UTC(2026, 5, 10, 0, 0, 0)); // ماه‌ها 0-index: ژوئن = 5
+
+    function createHearts() {
+      const container = document.getElementById('hearts');
+      const hearts = ['❤️', '💕', '💗', '💖', '🌸', '✨', '🌹'];
+      for (let i = 0; i < 18; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (12 + Math.random() * 18) + 's';
+        heart.style.animationDelay = (Math.random() * 12) + 's';
+        heart.style.fontSize = (0.9 + Math.random() * 1.4) + 'rem';
+        container.appendChild(heart);
+      }
+    }
+
+    function getDuration() {
+      const now = new Date();
+      // محاسبه اختلاف دقیق
+      let years = now.getFullYear() - startDate.getFullYear();
+      let months = now.getMonth() - startDate.getMonth();
+      let days = now.getDate() - startDate.getDate();
+
+      if (days < 0) {
+        months--;
+        // تعداد روزهای ماه قبل
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      // اگر هنوز به تاریخ شروع نرسیدیم
+      if (years < 0 || (years === 0 && months < 0) || (years === 0 && months === 0 && days < 0)) {
+        return { years: 0, months: 0, days: 0, totalDays: 0, future: true };
+      }
+
+      // محاسبه کل روزها برای منطق نمایش
+      const diffMs = now - startDate;
+      const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+      return { years, months, days, totalDays, future: false };
+    }
+
+    function formatPersian(num) {
+      return num.toLocaleString('fa-IR');
+    }
+
+    function updateDuration() {
+      const { years, months, days, totalDays, future } = getDuration();
+      const el = document.getElementById('time-text');
+
+      if (future) {
+        el.textContent = 'هنوز شروع نشده... منتظر روز قشنگمون هستیم 💫';
+        return;
+      }
+
+      let text = '';
+
+      if (totalDays === 0) {
+        text = 'امروز روز اول عشقمون هست! 🎉';
+      } else if (totalDays <= 30) {
+        // فقط روز
+        text = `${formatPersian(totalDays)} روز`;
+      } else if (years === 0) {
+        // کمتر از یک سال → ماه و روز
+        if (months === 0) {
+          text = `${formatPersian(days)} روز`;
+        } else if (days === 0) {
+          text = `${formatPersian(months)} ماه`;
+        } else {
+          text = `${formatPersian(months)} ماه و ${formatPersian(days)} روز`;
+        }
+      } else {
+        // یک سال یا بیشتر
+        let parts = [];
+        if (years > 0) parts.push(`${formatPersian(years)} سال`);
+        if (months > 0) parts.push(`${formatPersian(months)} ماه`);
+        if (days > 0) parts.push(`${formatPersian(days)} روز`);
+        text = parts.join(' و ');
+      }
+
+      el.textContent = text;
+    }
+
+    // اجرا
+    createHearts();
+    updateDuration();
+    // هر دقیقه آپدیت بشه
+    setInterval(updateDuration, 60 * 1000);
+  </script>
+</body>
+</html>
