@@ -3,19 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>روز شمار عشق من و غزال 💕</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#fff7fb" />
+
+  <title>برای غزال ❤️</title>
+
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap");
+
     :root {
-      --rose: #e11d48;
-      --rose-light: #fb7185;
-      --pink: #fce7f3;
-      --cream: #fff1f2;
-      --deep: #9f1239;
-      --gold: #fbbf24;
-      --text: #4c0519;
+      --pink: #df5b8d;
+      --pink-dark: #c84576;
+      --purple: #9875ca;
+      --text: #4a3d47;
+      --muted: #887985;
+      --soft: #a798a5;
+
+      --light-bg:
+        radial-gradient(circle at 10% 8%, rgba(255, 188, 215, .38), transparent 26%),
+        radial-gradient(circle at 90% 14%, rgba(215, 194, 255, .33), transparent 27%),
+        radial-gradient(circle at 50% 100%, rgba(255, 219, 235, .32), transparent 30%),
+        linear-gradient(135deg, #fffafd 0%, #fff6fa 48%, #f8f4ff 100%);
+
+      --shadow: 0 25px 75px rgba(145, 98, 135, .12);
+      --shadow-soft: 0 12px 35px rgba(145, 98, 135, .08);
     }
 
     * {
@@ -24,353 +34,2139 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Vazirmatn', sans-serif;
-      background: linear-gradient(135deg, #fff1f2 0%, #fce7f3 40%, #fdf2f8 70%, #fff7ed 100%);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
-      position: relative;
-      color: var(--text);
+    html {
+      scroll-behavior: smooth;
     }
 
-    /* Floating hearts background */
-    .hearts-bg {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: "Vazirmatn", Tahoma, sans-serif;
+      color: var(--text);
+      background: var(--light-bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body.intro-active {
       overflow: hidden;
     }
 
-    .heart {
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* =========================================================
+       INTRO
+       ========================================================= */
+
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(115, 106, 171, .12), transparent 28%),
+        radial-gradient(circle at 20% 75%, rgba(97, 91, 154, .10), transparent 28%),
+        linear-gradient(
+          180deg,
+          #080d22 0%,
+          #0d1430 48%,
+          #151a3a 75%,
+          #20213d 100%
+        );
+
+      opacity: 1;
+      visibility: visible;
+      transition:
+        opacity 1.4s ease,
+        visibility 0s linear 0s;
+    }
+
+    .intro.hide {
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 1.4s ease,
+        visibility 0s linear 1.4s;
+      pointer-events: none;
+    }
+
+    .intro-night {
       position: absolute;
-      font-size: 1.2rem;
-      opacity: 0.25;
-      animation: floatHeart linear infinite;
-      color: var(--rose-light);
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 75%, rgba(124, 106, 170, .10), transparent 25%),
+        linear-gradient(180deg, transparent, rgba(16, 18, 40, .12));
     }
 
-    @keyframes floatHeart {
-      0% {
-        transform: translateY(100vh) rotate(0deg) scale(0.6);
-        opacity: 0;
-      }
-      10% { opacity: 0.35; }
-      90% { opacity: 0.2; }
-      100% {
-        transform: translateY(-20vh) rotate(360deg) scale(1.1);
-        opacity: 0;
-      }
-    }
+    /* Moon */
+    .moon {
+      position: absolute;
+      top: 12%;
+      right: 13%;
 
-    .container {
-      position: relative;
-      z-index: 10;
-      max-width: 640px;
-      width: 92%;
-      text-align: center;
-      padding: 2.5rem 1.8rem;
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(18px);
-      border-radius: 28px;
+      width: clamp(85px, 12vw, 145px);
+      aspect-ratio: 1;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(circle at 38% 34%, rgba(255,255,255,.8) 0 4%, transparent 4.6%),
+        radial-gradient(circle at 65% 28%, rgba(205,205,215,.42) 0 7%, transparent 7.6%),
+        radial-gradient(circle at 35% 62%, rgba(205,205,215,.28) 0 9%, transparent 9.6%),
+        radial-gradient(circle at 74% 67%, rgba(205,205,215,.32) 0 6%, transparent 6.8%),
+        linear-gradient(145deg, #fffdf6, #eee9de);
+
       box-shadow:
-        0 25px 50px -12px rgba(225, 29, 72, 0.18),
-        0 0 0 1px rgba(251, 113, 133, 0.2);
-      animation: fadeInUp 1.2s ease-out;
+        0 0 22px rgba(255, 246, 216, .20),
+        0 0 70px rgba(229, 219, 255, .16);
+
+      animation: moonBreath 6s ease-in-out infinite;
     }
 
-    @keyframes fadeInUp {
-      from {
+    .moon::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #0b1128;
+      left: 22%;
+      top: -9%;
+      opacity: .97;
+    }
+
+    @keyframes moonBreath {
+      0%, 100% {
+        transform: translate3d(0, 0, 0);
+        box-shadow:
+          0 0 22px rgba(255, 246, 216, .20),
+          0 0 70px rgba(229, 219, 255, .16);
+      }
+
+      50% {
+        transform: translate3d(0, -4px, 0);
+        box-shadow:
+          0 0 28px rgba(255, 246, 216, .25),
+          0 0 90px rgba(229, 219, 255, .19);
+      }
+    }
+
+    /* Stars */
+    .stars,
+    .shooting-stars {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 8px rgba(255,255,255,.55);
+      animation: twinkle ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: .22;
+        transform: scale(.85);
+      }
+
+      50% {
+        opacity: .95;
+        transform: scale(1.15);
+      }
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 95px;
+      height: 1px;
+
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0),
+        rgba(255,255,255,.6),
+        rgba(255,255,255,0)
+      );
+
+      transform: rotate(-28deg);
+      opacity: 0;
+
+      animation: shooting 8s linear infinite;
+    }
+
+    @keyframes shooting {
+      0%, 72% {
         opacity: 0;
-        transform: translateY(40px);
+        transform: translate3d(0, 0, 0) rotate(-28deg);
+      }
+
+      74% {
+        opacity: .65;
+      }
+
+      80% {
+        opacity: 0;
+        transform: translate3d(-220px, 150px, 0) rotate(-28deg);
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    /* Thin cloud */
+    .cloud {
+      position: absolute;
+      width: 600px;
+      height: 150px;
+      border-radius: 50%;
+      filter: blur(20px);
+      opacity: .045;
+      background: #d8caff;
+      will-change: transform;
+      animation: cloudMove 26s ease-in-out infinite alternate;
+    }
+
+    .cloud.one {
+      right: -200px;
+      top: 50%;
+    }
+
+    .cloud.two {
+      left: -250px;
+      top: 65%;
+      width: 500px;
+      animation-delay: -8s;
+      animation-duration: 34s;
+    }
+
+    @keyframes cloudMove {
+      from {
+        transform: translate3d(0, 0, 0);
       }
       to {
-        opacity: 1;
-        transform: translateY(0);
+        transform: translate3d(80px, 20px, 0);
       }
     }
 
-    .title {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.4rem, 8vw, 3.6rem);
-      color: var(--rose);
-      margin-bottom: 0.3rem;
-      text-shadow: 0 2px 12px rgba(225, 29, 72, 0.25);
-      letter-spacing: 1px;
+    /* Intro content */
+    .intro-content {
+      position: relative;
+      z-index: 5;
+
+      width: min(850px, calc(100% - 32px));
+      min-height: 100%;
+
+      margin: auto;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
     }
 
-    .subtitle {
-      font-size: 1.05rem;
-      font-weight: 400;
-      color: var(--deep);
-      opacity: 0.85;
-      margin-bottom: 1.8rem;
-      line-height: 1.7;
+    .story-line {
+      min-height: 110px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
-    .dates-box {
-      background: linear-gradient(135deg, #fff1f2, #fce7f3);
-      border-radius: 18px;
-      padding: 1.1rem 1.4rem;
-      margin-bottom: 1.8rem;
-      border: 1px solid rgba(251, 113, 133, 0.25);
+    .story-line p {
+      color: rgba(255,255,255,.74);
+      font-size: clamp(1rem, 2.8vw, 1.28rem);
+      font-weight: 300;
+      line-height: 2;
+      opacity: 0;
+      transform: translateY(12px);
+      transition:
+        opacity .9s ease,
+        transform .9s ease;
     }
 
-    .dates-box p {
-      font-size: 0.95rem;
-      line-height: 1.9;
-      color: var(--deep);
+    .story-line p.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .dates-box .miladi {
-      font-weight: 600;
-      color: var(--rose);
+    .story-line .date {
+      margin-bottom: 8px;
+      font-size: clamp(.82rem, 2vw, .98rem);
+      color: rgba(255,255,255,.42);
+      letter-spacing: .2px;
     }
 
-    .dates-box .shamsi {
-      font-weight: 600;
-      color: var(--deep);
+    .story-line .main {
+      color: rgba(255,255,255,.84);
     }
 
-    .counter-label {
+    .midnight {
+      margin-top: 25px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .midnight.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .countdown-number {
+      font-size: clamp(3rem, 10vw, 6rem);
+      line-height: 1;
+      font-weight: 300;
+      color: rgba(255,255,255,.95);
+      letter-spacing: -2px;
+      font-variant-numeric: tabular-nums;
+
+      text-shadow:
+        0 0 30px rgba(255,255,255,.06);
+    }
+
+    .countdown-label {
+      margin-top: 12px;
+      color: rgba(255,255,255,.36);
+      font-size: .72rem;
+    }
+
+    .transition-date {
+      margin-top: 15px;
+
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      color: rgba(255,255,255,.78);
+
+      opacity: 0;
+      transform: translateY(10px) scale(.98);
+
+      transition:
+        opacity .9s ease,
+        transform .9s ease;
+    }
+
+    .transition-date.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Special moment */
+    .ghazal-moment {
+      position: absolute;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      opacity: 0;
+      transform: translateY(18px) scale(.97);
+
+      pointer-events: none;
+
+      transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+    }
+
+    .ghazal-moment.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .ghazal-moment .line {
+      color: rgba(255,255,255,.66);
+      font-size: .95rem;
+      margin-bottom: 15px;
+    }
+
+    .ghazal-moment .name {
+      font-size: clamp(3.7rem, 15vw, 7rem);
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -1px;
+
+      color: #fff;
+      text-shadow:
+        0 0 10px rgba(255,255,255,.12),
+        0 0 30px rgba(246, 166, 201, .14);
+    }
+
+    .ghazal-moment .sub {
+      margin-top: 10px;
+      color: rgba(255,255,255,.54);
+      font-size: .9rem;
+    }
+
+    .memory-star {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+      box-shadow:
+        0 0 8px rgba(255,255,255,.9),
+        0 0 25px rgba(255,255,255,.65);
+
+      opacity: 0;
+      transform: scale(.4);
+    }
+
+    .memory-star.fly {
+      animation: memoryFly 1.8s cubic-bezier(.22,.8,.25,1) forwards;
+    }
+
+    @keyframes memoryFly {
+      0% {
+        opacity: 0;
+        transform: translate3d(0,0,0) scale(.4);
+      }
+
+      12% {
+        opacity: 1;
+        transform: translate3d(0,0,0) scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate3d(-170px,120px,0) scale(.25);
+      }
+    }
+
+    .skip-intro {
+      position: absolute;
+      z-index: 20;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      border: 0;
+      background: transparent;
+
+      color: rgba(255,255,255,.32);
+
+      font-family: inherit;
+      font-size: .72rem;
+
+      cursor: pointer;
+
+      transition: color .2s ease;
+    }
+
+    .skip-intro:hover {
+      color: rgba(255,255,255,.7);
+    }
+
+    /* Sunrise layer */
+    .sunrise {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+
+      background:
+        radial-gradient(
+          ellipse at 50% 120%,
+          rgba(255, 185, 214, .95) 0%,
+          rgba(255, 210, 224, .55) 17%,
+          rgba(220, 200, 245, .28) 38%,
+          rgba(255,255,255,0) 68%
+        );
+
+      opacity: 0;
+      transform: scale(1.08);
+      transition:
+        opacity 2.5s ease,
+        transform 3s ease;
+    }
+
+    .sunrise.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* =========================================================
+       MAIN PAGE
+       ========================================================= */
+
+    #site {
+      opacity: 0;
+      transform: translateY(20px);
+      transition:
+        opacity 1.3s ease,
+        transform 1.3s ease;
+    }
+
+    #site.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .main-glow {
+      position: fixed;
+      width: 290px;
+      height: 290px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -3;
+      opacity: .20;
+      filter: blur(60px);
+      will-change: transform;
+      animation: mainGlow 14s ease-in-out infinite alternate;
+    }
+
+    .main-glow.one {
+      top: -105px;
+      right: -75px;
+      background: #ff9bbf;
+    }
+
+    .main-glow.two {
+      bottom: -105px;
+      left: -80px;
+      background: #bda3ff;
+      animation-delay: -5s;
+    }
+
+    @keyframes mainGlow {
+      from {
+        transform: translate3d(0,0,0) scale(1);
+      }
+      to {
+        transform: translate3d(25px,20px,0) scale(1.08);
+      }
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 3;
+    }
+
+    .particle {
+      position: absolute;
+      top: -30px;
+      opacity: .3;
+      will-change: transform;
+      animation: falling linear infinite;
+    }
+
+    @keyframes falling {
+      from {
+        transform: translate3d(0,-40px,0) rotate(0deg);
+      }
+      to {
+        transform: translate3d(32px,110vh,0) rotate(300deg);
+      }
+    }
+
+    /* Navbar */
+    .nav {
+      width: min(1080px, calc(100% - 32px));
+      margin: 18px auto 0;
+      padding: 13px 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 20px;
+
+      box-shadow: var(--shadow-soft);
+
+      position: relative;
+      z-index: 20;
+    }
+
+    .brand {
+      color: var(--pink);
       font-size: 1rem;
-      color: var(--deep);
-      opacity: 0.8;
-      margin-bottom: 0.6rem;
+      font-weight: 800;
+      white-space: nowrap;
     }
 
-    .duration {
-      font-size: clamp(1.6rem, 5.5vw, 2.15rem);
-      font-weight: 700;
-      color: var(--rose);
-      line-height: 1.5;
-      min-height: 3.2rem;
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: .84rem;
+
+      padding: 8px 13px;
+      border-radius: 12px;
+
+      transition: color .2s ease, background-color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--pink);
+      background: #fff0f6;
+    }
+
+    /* Hero */
+    .hero {
+      width: min(1080px, calc(100% - 32px));
+      min-height: calc(100vh - 78px);
+
+      margin: auto;
+      padding: 58px 0 90px;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.35rem;
-      flex-wrap: wrap;
-      padding: 0.5rem 0;
+
+      text-align: center;
     }
 
-    .duration span {
-      display: inline-block;
-      animation: pulseSoft 2.5s ease-in-out infinite;
+    .hero-content {
+      width: 100%;
+      max-width: 900px;
     }
 
-    @keyframes pulseSoft {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
+    .heart-orbit {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 20px;
+
+      display: grid;
+      place-items: center;
+
+      background: rgba(255,255,255,.83);
+      border: 1px solid white;
+      border-radius: 50%;
+
+      box-shadow:
+        0 14px 45px rgba(223,90,140,.18),
+        inset 0 0 0 8px rgba(255,241,247,.7);
+
+      animation: heartPulse 1.8s ease-in-out infinite;
     }
 
-    .heart-icon {
-      font-size: 1.5rem;
-      animation: heartbeat 1.4s ease-in-out infinite;
-      display: inline-block;
+    .heart-orbit span {
+      font-size: 2rem;
     }
 
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      15% { transform: scale(1.25); }
-      30% { transform: scale(1); }
-      45% { transform: scale(1.15); }
-      60% { transform: scale(1); }
-    }
-
-    .poem {
-      margin-top: 2rem;
-      padding-top: 1.6rem;
-      border-top: 1px dashed rgba(225, 29, 72, 0.25);
-      font-size: 0.98rem;
-      line-height: 2;
-      color: var(--deep);
-      opacity: 0.9;
-      font-weight: 400;
-    }
-
-    .poem .line {
-      display: block;
-    }
-
-    .footer {
-      margin-top: 1.8rem;
-      font-size: 0.82rem;
-      color: var(--rose-light);
-      opacity: 0.75;
-    }
-
-    .names {
-      font-weight: 600;
-      color: var(--rose);
-      font-size: 1.15rem;
-      margin-top: 0.4rem;
-    }
-
-    /* Decorative elements */
-    .deco {
-      position: absolute;
-      font-size: 1.8rem;
-      opacity: 0.4;
-      pointer-events: none;
-    }
-    .deco.top-left { top: 18px; right: 22px; }
-    .deco.top-right { top: 18px; left: 22px; }
-    .deco.bottom-left { bottom: 18px; right: 22px; }
-    .deco.bottom-right { bottom: 18px; left: 22px; }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 2rem 1.3rem;
+    @keyframes heartPulse {
+      0%,100% {
+        transform: scale(1);
       }
-      .poem {
-        font-size: 0.9rem;
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    .small-title {
+      color: var(--pink);
+      font-size: .86rem;
+      font-weight: 600;
+      margin-bottom: 9px;
+    }
+
+    .name {
+      display: inline-block;
+      max-width: calc(100vw - 48px);
+
+      padding: 0 .17em .12em;
+
+      font-size: clamp(3.3rem, 13vw, 6.5rem);
+      line-height: 1.22;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+
+      background: linear-gradient(
+        120deg,
+        #d94c82 0%,
+        #ee769f 42%,
+        #a275d1 100%
+      );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .romantic-line {
+      max-width: 720px;
+      margin: 13px auto 0;
+
+      color: #705b68;
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      line-height: 2;
+    }
+
+    .date-line {
+      margin-top: 14px;
+      color: var(--soft);
+      font-size: .82rem;
+    }
+
+    .date-line strong {
+      color: var(--pink-dark);
+    }
+
+    /* Counter */
+    .counter-card {
+      max-width: 860px;
+      margin: 32px auto 0;
+      padding: 24px;
+
+      background: rgba(255,255,255,.69);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 30px;
+
+      box-shadow: var(--shadow);
+    }
+
+    .counter-title {
+      color: #725d6d;
+      font-size: .9rem;
+      margin-bottom: 6px;
+    }
+
+    .counter-subtitle {
+      color: #aa9ca7;
+      font-size: .76rem;
+      margin-bottom: 21px;
+    }
+
+    .counter {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 12px;
+    }
+
+    .counter-item {
+      padding: 19px 8px 17px;
+
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 20px;
+
+      box-shadow: 0 8px 22px rgba(145,104,135,.05);
+
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .counter-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(145,104,135,.09);
+    }
+
+    .counter-number {
+      direction: ltr;
+      font-size: clamp(1.6rem,4vw,2.55rem);
+      line-height: 1;
+      font-weight: 800;
+      color: var(--pink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .counter-label {
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    .today-box {
+      margin-top: 18px;
+      padding-top: 17px;
+
+      border-top: 1px solid rgba(160,130,150,.12);
+
+      color: #887581;
+      font-size: .8rem;
+    }
+
+    .today-box strong {
+      color: var(--pink-dark);
+    }
+
+    /* Buttons */
+    .actions {
+      margin-top: 25px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 12px 20px;
+
+      font: inherit;
+      font-size: .86rem;
+
+      border-radius: 15px;
+      text-decoration: none;
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background-color .2s ease;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg,#e15a8b,#ae77d2);
+      box-shadow: 0 12px 28px rgba(220,82,137,.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(220,82,137,.27);
+    }
+
+    .btn-secondary {
+      color: var(--pink);
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(223,90,140,.14);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: #fff;
+    }
+
+    /* Sections */
+    section {
+      width: min(1000px, calc(100% - 32px));
+      margin: 0 auto 95px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .section-title span {
+      display: block;
+      color: var(--pink);
+      font-size: .79rem;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.7rem,4vw,2.5rem);
+      color: #4a3e47;
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 16px;
+    }
+
+    .card {
+      padding: 27px 22px;
+
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 25px;
+
+      box-shadow: var(--shadow);
+
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 28px 60px rgba(140,91,126,.14);
+    }
+
+    .card-icon {
+      font-size: 1.9rem;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: .87rem;
+      line-height: 2;
+    }
+
+    /* Letter */
+    .letter {
+      position: relative;
+      overflow: hidden;
+
+      padding: clamp(28px,6vw,60px);
+
+      background: rgba(255,255,255,.84);
+
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 30px;
+
+      box-shadow: var(--shadow);
+    }
+
+    .letter::before {
+      content: "♥";
+      position: absolute;
+      left: -28px;
+      bottom: -90px;
+
+      font-size: 17rem;
+      line-height: 1;
+      color: rgba(223,90,140,.045);
+
+      transform: rotate(-12deg);
+    }
+
+    .letter-top {
+      text-align: right;
+      margin-bottom: 22px;
+
+      color: var(--pink);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .letter p {
+      position: relative;
+      z-index: 1;
+
+      color: #645761;
+      font-size: .96rem;
+      line-height: 2.45;
+      margin-bottom: 14px;
+    }
+
+    .signature {
+      position: relative;
+      z-index: 1;
+
+      margin-top: 28px;
+      text-align: left;
+
+      color: var(--pink-dark);
+      font-weight: 700;
+    }
+
+    /* Final */
+    .final {
+      text-align: center;
+      padding: 65px 22px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,224,238,.75),
+          rgba(232,223,255,.72)
+        );
+
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 34px;
+
+      box-shadow: var(--shadow);
+    }
+
+    .final-heart {
+      font-size: 3.6rem;
+      margin-bottom: 12px;
+      animation: heartPulse 1.7s ease-in-out infinite;
+    }
+
+    .final h2 {
+      font-size: clamp(1.8rem,5vw,3rem);
+      margin-bottom: 12px;
+    }
+
+    .final p {
+      color: var(--muted);
+      line-height: 2;
+      margin-bottom: 23px;
+    }
+
+    footer {
+      padding: 15px 15px 35px;
+      text-align: center;
+      color: #a497a2;
+      font-size: .76rem;
+    }
+
+    /* Lightweight modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background: rgba(55,37,49,.36);
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+
+      transition:
+        opacity .18s ease,
+        visibility 0s linear .18s;
+    }
+
+    .modal.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+
+      transition:
+        opacity .18s ease,
+        visibility 0s linear 0s;
+    }
+
+    .modal-box {
+      width: min(500px,100%);
+      padding: 38px 27px;
+
+      background: white;
+      border: 1px solid white;
+      border-radius: 28px;
+
+      box-shadow: 0 25px 80px rgba(50,30,48,.18);
+
+      transform: translateY(12px) scale(.97);
+      transition: transform .18s ease;
+    }
+
+    .modal.is-open .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-symbol {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    .modal-box h2 {
+      text-align: center;
+      color: var(--pink-dark);
+      margin-bottom: 13px;
+    }
+
+    .modal-box p {
+      color: var(--muted);
+      text-align: center;
+      line-height: 2.2;
+      font-size: .91rem;
+    }
+
+    .modal-close {
+      display: block;
+      margin: 23px auto 0;
+    }
+
+    /* Click hearts */
+    .click-heart {
+      position: fixed;
+      z-index: 2000;
+      pointer-events: none;
+
+      font-size: 16px;
+
+      will-change: transform, opacity;
+
+      animation: clickHeart .8s ease-out forwards;
+    }
+
+    @keyframes clickHeart {
+      0% {
+        opacity: 1;
+        transform: translate3d(0,0,0) scale(.9);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate3d(0,-65px,0) scale(1.45);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 760px) {
+      .nav {
+        margin-top: 12px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 48px;
+      }
+
+      .counter {
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .letter {
+        padding: 32px 21px;
+      }
+
+      .moon {
+        top: 9%;
+        right: 8%;
+      }
+
+      .ghazal-moment .sub {
+        font-size: .78rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .counter-card {
+        padding: 15px;
+      }
+
+      .counter {
+        gap: 8px;
+      }
+
+      .counter-item {
+        padding: 16px 5px;
+      }
+
+      .counter-number {
+        font-size: 1.5rem;
+      }
+
+      .counter-label {
+        font-size: .68rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
       }
     }
   </style>
 </head>
-<body>
-  <div class="hearts-bg" id="hearts"></div>
 
-  <div class="container">
-    <div class="deco top-left">🌸</div>
-    <div class="deco top-right">🌸</div>
-    <div class="deco bottom-left">✨</div>
-    <div class="deco bottom-right">✨</div>
+<body class="intro-active">
 
-    <h1 class="title">عشق ما</h1>
-    <p class="subtitle">
-      از روزی که قلب‌هامون به هم گره خورد...<br>
-      هر لحظه با تو، قصه‌ی قشنگ‌تری می‌شه
-    </p>
+  <!-- =======================================================
+       INTRO
+       ======================================================= -->
 
-    <div class="dates-box">
-      <p>
-        شروع رابطه:<br>
-        <span class="miladi">۱۰ ژوئن ۲۰۲۶</span>
-        &nbsp;•&nbsp;
-        <span class="shamsi">۲۰ خرداد ۱۴۰۵</span>
-      </p>
+  <div class="intro" id="intro">
+
+    <div class="intro-night"></div>
+
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+
+    <div class="stars" id="introStars"></div>
+    <div class="shooting-stars">
+      <div
+        class="shooting-star"
+        style="top: 24%; left: 65%; animation-delay: 1s;"
+      ></div>
+
+      <div
+        class="shooting-star"
+        style="top: 38%; left: 30%; animation-delay: 5s;"
+      ></div>
     </div>
 
-    <p class="counter-label">تا این لحظه گذشته:</p>
-    <div class="duration" id="duration">
-      <span class="heart-icon">❤️</span>
-      <span id="time-text">در حال محاسبه...</span>
-      <span class="heart-icon">❤️</span>
+    <div class="moon"></div>
+
+    <div class="sunrise" id="sunrise"></div>
+
+    <div class="intro-content">
+
+      <!-- First line -->
+      <div class="story-line" id="storyOne">
+        <p class="date">۱۹ خرداد ۱۴۰۵</p>
+
+        <p class="main">
+          تا اون شب، همه‌چیز معمولی بود...
+        </p>
+      </div>
+
+      <!-- Countdown -->
+      <div class="midnight" id="midnight">
+
+        <div
+          class="countdown-number"
+          id="countdownNumber"
+        >
+          ۵
+        </div>
+
+        <div class="countdown-label">
+          چند ثانیه تا یک روز متفاوت...
+        </div>
+
+        <div
+          class="transition-date"
+          id="transitionDate"
+        >
+          ۲۰ خرداد ۱۴۰۵
+        </div>
+
+      </div>
+
+      <!-- Ghazal moment -->
+      <div class="ghazal-moment" id="ghazalMoment">
+
+        <div class="line">
+          تا اینکه...
+        </div>
+
+        <div class="name">
+          غزال
+        </div>
+
+        <div class="sub">
+          رو دیدم. ❤️
+        </div>
+
+      </div>
+
+      <div
+        class="memory-star"
+        id="memoryStar"
+      ></div>
+
     </div>
 
-    <div class="poem">
-      <span class="line">هر روز که با تو می‌گذره،</span>
-      <span class="line">مثل ستاره‌ای به آسمون عشقمون اضافه می‌شه.</span>
-      <span class="line">غزال جان، ممنونم که هستی... 💕</span>
-    </div>
+    <button
+      class="skip-intro"
+      id="skipIntro"
+      type="button"
+    >
+      رد کردن ←
+    </button>
 
-    <div class="footer">
-      ساخته شده با عشق برای
-      <div class="names">جوجه صورتی قرتی</div>
-    </div>
   </div>
 
+
+  <!-- =======================================================
+       MAIN SITE
+       ======================================================= -->
+
+  <div id="site">
+
+    <div class="main-glow one"></div>
+    <div class="main-glow two"></div>
+
+    <div class="particles" id="particles"></div>
+
+    <!-- Navbar -->
+    <nav class="nav">
+
+      <div class="brand">
+        برای غزال ♡
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#home">شروع</a></li>
+        <li><a href="#meaning">چرا تو؟</a></li>
+        <li><a href="#letter">نامه</a></li>
+        <li><a href="#end">آخرش</a></li>
+      </ul>
+
+    </nav>
+
+
+    <!-- Hero -->
+    <main class="hero" id="home">
+
+      <div class="hero-content">
+
+        <div class="heart-orbit">
+          <span>❤️</span>
+        </div>
+
+        <div class="small-title">
+          از یک روز خاص شروع شد...
+        </div>
+
+        <div class="name">
+          غزال
+        </div>
+
+        <p class="romantic-line">
+          بعضی آدم‌ها وارد زندگی آدم نمی‌شوند که فقط یک خاطره باشند؛
+          می‌آیند تا خودِ معنیِ بعضی لحظه‌ها را عوض کنند.
+        </p>
+
+        <div class="date-line">
+          شروع ما:
+          <strong>۲۰ خرداد ۱۴۰۵</strong>
+          <span> • </span>
+          <strong>۱۰ ژوئن ۲۰۲۶</strong>
+        </div>
+
+
+        <!-- Counter -->
+        <div class="counter-card">
+
+          <div class="counter-title">
+            از ۲۰ خرداد ۱۴۰۵ با همیم...
+          </div>
+
+          <div class="counter-subtitle">
+            و هر ثانیه‌اش ارزش شمردن دارد ❤️
+          </div>
+
+          <div class="counter">
+
+            <div class="counter-item">
+              <div class="counter-number" id="days">
+                ۰
+              </div>
+
+              <div class="counter-label">
+                روز
+              </div>
+            </div>
+
+            <div class="counter-item">
+              <div class="counter-number" id="hours">
+                ۰
+              </div>
+
+              <div class="counter-label">
+                ساعت
+              </div>
+            </div>
+
+            <div class="counter-item">
+              <div class="counter-number" id="minutes">
+                ۰
+              </div>
+
+              <div class="counter-label">
+                دقیقه
+              </div>
+            </div>
+
+            <div class="counter-item">
+              <div class="counter-number" id="seconds">
+                ۰
+              </div>
+
+              <div class="counter-label">
+                ثانیه
+              </div>
+            </div>
+
+          </div>
+
+          <div class="today-box">
+            امروز:
+            <strong id="persianToday">
+              در حال محاسبه...
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="actions">
+
+          <button
+            class="btn btn-primary"
+            id="openLetterButton"
+          >
+            💌 یه چیزی برای تو
+          </button>
+
+          <a
+            class="btn btn-secondary"
+            href="#meaning"
+          >
+            ادامه ↓
+          </a>
+
+        </div>
+
+      </div>
+
+    </main>
+
+
+    <!-- Meaning -->
+    <section id="meaning">
+
+      <div class="section-title">
+
+        <span>
+          فقط برای تو
+        </span>
+
+        <h2>
+          چیزهایی که شاید نتوان گفت
+        </h2>
+
+      </div>
+
+
+      <div class="cards">
+
+        <article class="card">
+
+          <div class="card-icon">
+            🌷
+          </div>
+
+          <h3>
+            حضور تو
+          </h3>
+
+          <p>
+            بعضی آدم‌ها لازم نیست کار خاصی بکنند.
+            بودنشان به‌تنهایی حال آدم را بهتر می‌کند.
+          </p>
+
+        </article>
+
+
+        <article class="card">
+
+          <div class="card-icon">
+            ✨
+          </div>
+
+          <h3>
+            لبخند تو
+          </h3>
+
+          <p>
+            بعضی لبخندها فقط لبخند نیستند؛
+            یک تکه از آرامش‌اند که آدم دلش نمی‌آید از یاد ببرد.
+          </p>
+
+        </article>
+
+
+        <article class="card">
+
+          <div class="card-icon">
+            💗
+          </div>
+
+          <h3>
+            خودِ تو
+          </h3>
+
+          <p>
+            قرار نیست برای دوست‌داشتنی بودن کامل باشی.
+            خودت بودن، قشنگ‌ترین دلیل دنیاست.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- Letter -->
+    <section id="letter">
+
+      <div class="section-title">
+
+        <span>
+          از ۲۰ خرداد ۱۴۰۵
+        </span>
+
+        <h2>
+          نامه‌ای برای غزال
+        </h2>
+
+      </div>
+
+
+      <div class="letter">
+
+        <div class="letter-top">
+          غزال جان،
+        </div>
+
+        <p>
+          شاید روی تقویم، ۲۰ خرداد ۱۴۰۵ فقط یک تاریخ باشد؛
+          اما برای من روزی است که یک «قبل» و یک «بعد» ساخت.
+        </p>
+
+        <p>
+          تا ۱۹ خرداد، همه‌چیز معمولی بود.
+          روزها می‌آمدند و می‌رفتند،
+          مثل خیلی از روزهای دیگر.
+        </p>
+
+        <p>
+          اما ۲۰ خرداد تو را دیدم.
+          و از همان لحظه،
+          یک تاریخ ساده تبدیل شد به تاریخی که ارزش شمردن داشت.
+        </p>
+
+        <p>
+          از آن روز تا امروز، چیزی که می‌شمارم فقط روزها نیست.
+          هر روزش یک خاطره است، هر ساعتش یک حس،
+          و هر ثانیه‌اش یادآور این است که یک نفر وارد زندگی‌ام شده
+          که حضورش برایم معمولی نیست.
+        </p>
+
+        <p>
+          شاید قشنگ‌ترین قسمت ماجرا همین باشد:
+          اینکه همه‌چیز تا یک روز کاملاً معمولی بود،
+          و بعد از دیدن تو،
+          دیگر هیچ‌چیز کاملاً معمولی نماند.
+        </p>
+
+        <div class="signature">
+          برای غزال، که از ۲۰ خرداد به بعد، دنیا را کمی قشنگ‌تر کرد ♡
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Final -->
+    <section id="end">
+
+      <div class="final">
+
+        <div class="final-heart">
+          💗
+        </div>
+
+        <h2>
+          از ۲۰ خرداد ۱۴۰۵...
+        </h2>
+
+        <p>
+          هنوز هم هر ثانیه، ادامه‌ی همان لحظه‌ای است که غزال را دیدم.
+        </p>
+
+        <button
+          class="btn btn-primary"
+          id="finalMessageButton"
+        >
+          یه چیز دیگه هم هست...
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <footer>
+      ساخته شده با عشق، برای غزال ❤️
+    </footer>
+
+
+    <!-- Lightweight Modal -->
+    <div
+      class="modal"
+      id="loveModal"
+      aria-hidden="true"
+    >
+
+      <div
+        class="modal-box"
+        role="dialog"
+        aria-modal="true"
+      >
+
+        <div class="modal-symbol">
+          💌
+        </div>
+
+        <h2>
+          غزال...
+        </h2>
+
+        <p>
+          تا ۱۹ خرداد همه‌چیز معمولی بود.
+          <br><br>
+          بعد ۲۰ خرداد تو رو دیدم،
+          و یک روز معمولی تبدیل شد به
+          <strong>شروع ما</strong>. ❤️
+          <br><br>
+          شاید برای بقیه فقط یک تاریخ باشه؛
+          برای من، روزی بود که تو وارد داستانم شدی.
+        </p>
+
+        <button
+          class="btn btn-primary modal-close"
+          id="closeModalButton"
+        >
+          ❤️ بستن
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
   <script>
-    // تاریخ شروع رابطه (UTC برای دقت بیشتر)
-    const startDate = new Date(Date.UTC(2026, 5, 10, 0, 0, 0)); // ماه‌ها 0-index: ژوئن = 5
+    /* =========================================================
+       INTRO
+       ========================================================= */
 
-    function createHearts() {
-      const container = document.getElementById('hearts');
-      const hearts = ['❤️', '💕', '💗', '💖', '🌸', '✨', '🌹'];
-      for (let i = 0; i < 18; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'heart';
-        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-        heart.style.left = Math.random() * 100 + '%';
-        heart.style.animationDuration = (12 + Math.random() * 18) + 's';
-        heart.style.animationDelay = (Math.random() * 12) + 's';
-        heart.style.fontSize = (0.9 + Math.random() * 1.4) + 'rem';
-        container.appendChild(heart);
-      }
+    const intro = document.getElementById("intro");
+    const site = document.getElementById("site");
+
+    const storyOne = document.getElementById("storyOne");
+    const midnight = document.getElementById("midnight");
+    const countdownNumber = document.getElementById("countdownNumber");
+    const transitionDate = document.getElementById("transitionDate");
+
+    const ghazalMoment = document.getElementById("ghazalMoment");
+    const sunrise = document.getElementById("sunrise");
+    const memoryStar = document.getElementById("memoryStar");
+
+    const skipIntro = document.getElementById("skipIntro");
+    const introStars = document.getElementById("introStars");
+
+
+    /*
+      ساخت ستاره‌ها
+    */
+
+    for (let i = 0; i < 55; i++) {
+
+      const star = document.createElement("span");
+
+      star.className = "star";
+
+      const size = Math.random() > 0.82 ? 2.6 : 1.5;
+
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 82}%`;
+
+      star.style.animationDuration =
+        `${2.8 + Math.random() * 4.5}s`;
+
+      star.style.animationDelay =
+        `${Math.random() * 4}s`;
+
+      introStars.appendChild(star);
     }
 
-    function getDuration() {
-      const now = new Date();
-      // محاسبه اختلاف دقیق
-      let years = now.getFullYear() - startDate.getFullYear();
-      let months = now.getMonth() - startDate.getMonth();
-      let days = now.getDate() - startDate.getDate();
 
-      if (days < 0) {
-        months--;
-        // تعداد روزهای ماه قبل
-        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-        days += prevMonth.getDate();
-      }
+    /*
+      نشان دادن متن اول
+    */
 
-      if (months < 0) {
-        years--;
-        months += 12;
-      }
+    setTimeout(() => {
+      storyOne.querySelector(".date").classList.add("visible");
+    }, 700);
 
-      // اگر هنوز به تاریخ شروع نرسیدیم
-      if (years < 0 || (years === 0 && months < 0) || (years === 0 && months === 0 && days < 0)) {
-        return { years: 0, months: 0, days: 0, totalDays: 0, future: true };
-      }
+    setTimeout(() => {
+      storyOne.querySelector(".main").classList.add("visible");
+    }, 1500);
 
-      // محاسبه کل روزها برای منطق نمایش
-      const diffMs = now - startDate;
-      const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-      return { years, months, days, totalDays, future: false };
-    }
+    /*
+      شروع شمارش معکوس.
+      برای Intro مستقل از ساعت واقعی طراحی شده
+      تا روایت هر بار به شکل کنترل‌شده اجرا شود.
+    */
 
-    function formatPersian(num) {
-      return num.toLocaleString('fa-IR');
-    }
+    setTimeout(() => {
 
-    function updateDuration() {
-      const { years, months, days, totalDays, future } = getDuration();
-      const el = document.getElementById('time-text');
+      midnight.classList.add("visible");
 
-      if (future) {
-        el.textContent = 'هنوز شروع نشده... منتظر روز قشنگمون هستیم 💫';
-        return;
-      }
+      let current = 5;
 
-      let text = '';
+      countdownNumber.textContent =
+        current.toLocaleString("fa-IR");
 
-      if (totalDays === 0) {
-        text = 'امروز روز اول عشقمون هست! 🎉';
-      } else if (totalDays <= 30) {
-        // فقط روز
-        text = `${formatPersian(totalDays)} روز`;
-      } else if (years === 0) {
-        // کمتر از یک سال → ماه و روز
-        if (months === 0) {
-          text = `${formatPersian(days)} روز`;
-        } else if (days === 0) {
-          text = `${formatPersian(months)} ماه`;
+      const countdown = setInterval(() => {
+
+        current--;
+
+        if (current > 0) {
+
+          countdownNumber.textContent =
+            current.toLocaleString("fa-IR");
+
         } else {
-          text = `${formatPersian(months)} ماه و ${formatPersian(days)} روز`;
-        }
-      } else {
-        // یک سال یا بیشتر
-        let parts = [];
-        if (years > 0) parts.push(`${formatPersian(years)} سال`);
-        if (months > 0) parts.push(`${formatPersian(months)} ماه`);
-        if (days > 0) parts.push(`${formatPersian(days)} روز`);
-        text = parts.join(' و ');
-      }
 
-      el.textContent = text;
+          clearInterval(countdown);
+
+          countdownNumber.textContent = "۰۰:۰۰";
+
+          showMidnightMoment();
+        }
+
+      }, 900);
+
+    }, 3200);
+
+
+    /*
+      لحظه ۲۰ خرداد
+    */
+
+    function showMidnightMoment() {
+
+      transitionDate.classList.add("show");
+
+      /*
+        کمی مکث تا حس عبور از روز ایجاد شود.
+      */
+
+      setTimeout(() => {
+
+        storyOne.style.opacity = "0";
+        midnight.style.opacity = "0";
+
+      }, 800);
+
+
+      setTimeout(() => {
+
+        ghazalMoment.classList.add("show");
+
+        /*
+          ستاره‌ی خاطره
+        */
+
+        memoryStar.style.left = "66%";
+        memoryStar.style.top = "28%";
+
+        memoryStar.classList.add("fly");
+
+      }, 1250);
+
+
+      /*
+        طلوع و تغییر آسمان
+      */
+
+      setTimeout(() => {
+        sunrise.classList.add("show");
+      }, 2800);
+
+
+      /*
+        ورود به سایت اصلی
+      */
+
+      setTimeout(() => {
+        finishIntro();
+      }, 4700);
     }
 
-    // اجرا
-    createHearts();
-    updateDuration();
-    // هر دقیقه آپدیت بشه
-    setInterval(updateDuration, 60 * 1000);
+
+    function finishIntro() {
+
+      site.classList.add("visible");
+
+      /*
+        اجازه‌ی ورود انیمیشن خروج
+      */
+
+      requestAnimationFrame(() => {
+        intro.classList.add("hide");
+        document.body.classList.remove("intro-active");
+      });
+
+      /*
+        بعد از transition:
+        عنصر Intro از DOM نمایش خارج می‌شود.
+      */
+
+      setTimeout(() => {
+        intro.setAttribute("aria-hidden", "true");
+      }, 1500);
+    }
+
+
+    /*
+      رد کردن Intro
+    */
+
+    skipIntro.addEventListener("click", () => {
+      finishIntro();
+    });
+
+
+    /* =========================================================
+       MAIN COUNTER
+       ========================================================= */
+
+    /*
+      شروع رابطه:
+      ۲۰ خرداد ۱۴۰۵
+      = ۱۰ ژوئن ۲۰۲۶
+
+      ساعت شروع:
+      ۰۰:۰۰:۰۰
+    */
+
+    const startDate =
+      new Date("2026-06-10T00:00:00");
+
+
+    const daysEl =
+      document.getElementById("days");
+
+    const hoursEl =
+      document.getElementById("hours");
+
+    const minutesEl =
+      document.getElementById("minutes");
+
+    const secondsEl =
+      document.getElementById("seconds");
+
+    const persianTodayEl =
+      document.getElementById("persianToday");
+
+
+    function faNumber(value) {
+
+      return Number(value)
+        .toLocaleString("fa-IR");
+    }
+
+
+    /*
+      امروز به فرم:
+      یکشنبه، ۱۵ شهریورماه ۱۴۰۵
+    */
+
+    function updatePersianToday() {
+
+      const now = new Date();
+
+      const formatter =
+        new Intl.DateTimeFormat(
+          "fa-IR-u-ca-persian",
+          {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }
+        );
+
+      const parts =
+        formatter.formatToParts(now);
+
+      let weekday = "";
+      let day = "";
+      let month = "";
+      let year = "";
+
+      for (const part of parts) {
+
+        if (part.type === "weekday") {
+          weekday = part.value;
+        }
+
+        if (part.type === "day") {
+          day = part.value;
+        }
+
+        if (part.type === "month") {
+          month = part.value;
+        }
+
+        if (part.type === "year") {
+          year = part.value;
+        }
+      }
+
+      persianTodayEl.textContent =
+        `${weekday}، ${day} ${month}ماه ${year}`;
+    }
+
+
+    /*
+      شمارش مدت رابطه
+    */
+
+    function updateCounter() {
+
+      const now = new Date();
+
+      let difference =
+        now.getTime() - startDate.getTime();
+
+      if (difference < 0) {
+        difference = 0;
+      }
+
+      const totalSeconds =
+        Math.floor(difference / 1000);
+
+      const days =
+        Math.floor(totalSeconds / 86400);
+
+      const hours =
+        Math.floor(
+          (totalSeconds % 86400) / 3600
+        );
+
+      const minutes =
+        Math.floor(
+          (totalSeconds % 3600) / 60
+        );
+
+      const seconds =
+        totalSeconds % 60;
+
+
+      daysEl.textContent =
+        faNumber(days);
+
+      hoursEl.textContent =
+        faNumber(hours);
+
+      minutesEl.textContent =
+        faNumber(minutes);
+
+      secondsEl.textContent =
+        faNumber(seconds);
+    }
+
+
+    updateCounter();
+    updatePersianToday();
+
+    setInterval(updateCounter, 1000);
+
+    setInterval(updatePersianToday, 60000);
+
+
+    /* =========================================================
+       MAIN PARTICLES
+       ========================================================= */
+
+    const particles =
+      document.getElementById("particles");
+
+    const symbols = [
+      "♡",
+      "♥",
+      "✿",
+      "🌸"
+    ];
+
+    for (let i = 0; i < 16; i++) {
+
+      const element =
+        document.createElement("span");
+
+      element.className = "particle";
+
+      element.textContent =
+        symbols[
+          Math.floor(
+            Math.random() * symbols.length
+          )
+        ];
+
+      element.style.left =
+        `${Math.random() * 100}%`;
+
+      element.style.fontSize =
+        `${11 + Math.random() * 9}px`;
+
+      element.style.animationDuration =
+        `${9 + Math.random() * 7}s`;
+
+      element.style.animationDelay =
+        `${-Math.random() * 14}s`;
+
+      particles.appendChild(element);
+    }
+
+
+    /* =========================================================
+       MODAL
+       ========================================================= */
+
+    const modal =
+      document.getElementById("loveModal");
+
+    const openButton =
+      document.getElementById("openLetterButton");
+
+    const finalButton =
+      document.getElementById("finalMessageButton");
+
+    const closeButton =
+      document.getElementById("closeModalButton");
+
+
+    function openModal() {
+
+      modal.classList.add("is-open");
+
+      modal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+      document.body.style.overflow =
+        "hidden";
+
+      closeButton.focus();
+    }
+
+
+    function closeModal() {
+
+      modal.classList.remove("is-open");
+
+      modal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+      document.body.style.overflow =
+        "";
+    }
+
+
+    openButton.addEventListener(
+      "click",
+      openModal
+    );
+
+    finalButton.addEventListener(
+      "click",
+      openModal
+    );
+
+    closeButton.addEventListener(
+      "click",
+      closeModal
+    );
+
+
+    modal.addEventListener(
+      "click",
+      (event) => {
+
+        if (event.target === modal) {
+          closeModal();
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Escape" &&
+          modal.classList.contains("is-open")
+        ) {
+          closeModal();
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       CLICK HEARTS
+       ========================================================= */
+
+    document.addEventListener(
+      "click",
+      (event) => {
+
+        if (
+          event.target.closest("button") ||
+          event.target.closest("a") ||
+          event.target.closest(".modal-box") ||
+          event.target.closest(".skip-intro")
+        ) {
+          return;
+        }
+
+        const heart =
+          document.createElement("span");
+
+        heart.className =
+          "click-heart";
+
+        heart.textContent =
+          Math.random() > .5
+            ? "♥"
+            : "♡";
+
+        heart.style.left =
+          `${event.clientX}px`;
+
+        heart.style.top =
+          `${event.clientY}px`;
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 850);
+      }
+    );
   </script>
+
 </body>
 </html>
