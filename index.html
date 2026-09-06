@@ -2,8 +2,14 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#fff7fb" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+
+  <meta name="theme-color" content="#0a1026" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
   <title>برای غزال ❤️</title>
 
@@ -11,45 +17,56 @@
     @import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap");
 
     :root {
-      --pink: #df5b8d;
-      --pink-dark: #c84576;
+      --pink: #df5a8c;
+      --pink-dark: #c94477;
       --purple: #9875ca;
-      --text: #4a3d47;
-      --muted: #887985;
-      --soft: #a798a5;
 
-      --light-bg:
-        radial-gradient(circle at 10% 8%, rgba(255, 188, 215, .38), transparent 26%),
-        radial-gradient(circle at 90% 14%, rgba(215, 194, 255, .33), transparent 27%),
-        radial-gradient(circle at 50% 100%, rgba(255, 219, 235, .32), transparent 30%),
-        linear-gradient(135deg, #fffafd 0%, #fff6fa 48%, #f8f4ff 100%);
+      --text: #463b44;
+      --muted: #887983;
+      --soft: #a697a4;
 
-      --shadow: 0 25px 75px rgba(145, 98, 135, .12);
-      --shadow-soft: 0 12px 35px rgba(145, 98, 135, .08);
+      --main-bg:
+        radial-gradient(circle at 8% 8%, rgba(255, 185, 214, .40), transparent 27%),
+        radial-gradient(circle at 92% 12%, rgba(210, 190, 255, .34), transparent 28%),
+        linear-gradient(135deg, #fffafd 0%, #fff6fa 50%, #f8f4ff 100%);
+
+      --card-bg: rgba(255, 255, 255, .80);
+      --border: rgba(255, 255, 255, .95);
+
+      --shadow:
+        0 24px 65px rgba(137, 91, 127, .11);
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     html {
       scroll-behavior: smooth;
+      background: #fff9fc;
     }
 
     body {
       min-height: 100vh;
       overflow-x: hidden;
+
       font-family: "Vazirmatn", Tahoma, sans-serif;
       color: var(--text);
-      background: var(--light-bg);
+
+      background: var(--main-bg);
+
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
 
-    body.intro-active {
+    body.lock-scroll {
       overflow: hidden;
+      height: 100vh;
     }
 
     button,
@@ -57,540 +74,605 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* =========================================================
-       INTRO
-       ========================================================= */
+    button {
+      font-family: inherit;
+    }
 
-    .intro {
+    /* =====================================================
+       INTRO
+       ===================================================== */
+
+    #intro {
       position: fixed;
       inset: 0;
-      z-index: 9999;
+      z-index: 5000;
+
       overflow: hidden;
+
       background:
-        radial-gradient(circle at 70% 20%, rgba(115, 106, 171, .12), transparent 28%),
-        radial-gradient(circle at 20% 75%, rgba(97, 91, 154, .10), transparent 28%),
+        radial-gradient(
+          circle at 70% 18%,
+          rgba(112, 106, 169, .11),
+          transparent 28%
+        ),
         linear-gradient(
           180deg,
-          #080d22 0%,
-          #0d1430 48%,
-          #151a3a 75%,
-          #20213d 100%
+          #080d20 0%,
+          #0c1330 46%,
+          #151936 78%,
+          #1d1e39 100%
         );
 
       opacity: 1;
       visibility: visible;
+
       transition:
-        opacity 1.4s ease,
+        opacity 1.25s ease,
         visibility 0s linear 0s;
     }
 
-    .intro.hide {
+    #intro.intro-hidden {
       opacity: 0;
       visibility: hidden;
+      pointer-events: none;
+
       transition:
-        opacity 1.4s ease,
-        visibility 0s linear 1.4s;
+        opacity 1.25s ease,
+        visibility 0s linear 1.25s;
+    }
+
+    .intro-layer {
+      position: absolute;
+      inset: 0;
       pointer-events: none;
     }
 
-    .intro-night {
-      position: absolute;
-      inset: 0;
+    /* subtle night gradient */
+    .night-vignette {
       background:
-        radial-gradient(circle at 50% 75%, rgba(124, 106, 170, .10), transparent 25%),
-        linear-gradient(180deg, transparent, rgba(16, 18, 40, .12));
+        radial-gradient(
+          ellipse at center,
+          transparent 0 30%,
+          rgba(0, 0, 0, .08) 70%,
+          rgba(0, 0, 0, .16) 100%
+        );
     }
 
-    /* Moon */
+    /* moon */
+    .moon-wrap {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+
+      top: max(7vh, 60px);
+      right: max(7vw, 28px);
+
+      pointer-events: none;
+    }
+
     .moon {
       position: absolute;
-      top: 12%;
-      right: 13%;
 
-      width: clamp(85px, 12vw, 145px);
-      aspect-ratio: 1;
+      width: 100%;
+      height: 100%;
 
       border-radius: 50%;
 
       background:
-        radial-gradient(circle at 38% 34%, rgba(255,255,255,.8) 0 4%, transparent 4.6%),
-        radial-gradient(circle at 65% 28%, rgba(205,205,215,.42) 0 7%, transparent 7.6%),
-        radial-gradient(circle at 35% 62%, rgba(205,205,215,.28) 0 9%, transparent 9.6%),
-        radial-gradient(circle at 74% 67%, rgba(205,205,215,.32) 0 6%, transparent 6.8%),
-        linear-gradient(145deg, #fffdf6, #eee9de);
+        radial-gradient(
+          circle at 34% 29%,
+          rgba(190, 187, 177, .32) 0 6%,
+          transparent 6.5%
+        ),
+        radial-gradient(
+          circle at 65% 28%,
+          rgba(190, 187, 177, .28) 0 8%,
+          transparent 8.5%
+        ),
+        radial-gradient(
+          circle at 40% 65%,
+          rgba(190, 187, 177, .25) 0 10%,
+          transparent 10.7%
+        ),
+        radial-gradient(
+          circle at 73% 66%,
+          rgba(190, 187, 177, .24) 0 6%,
+          transparent 6.7%
+        ),
+        linear-gradient(
+          145deg,
+          #fffef8,
+          #eeebdf
+        );
 
       box-shadow:
-        0 0 22px rgba(255, 246, 216, .20),
-        0 0 70px rgba(229, 219, 255, .16);
-
-      animation: moonBreath 6s ease-in-out infinite;
+        0 0 30px rgba(255, 245, 214, .20),
+        0 0 70px rgba(236, 225, 255, .10);
     }
 
     .moon::after {
       content: "";
+
       position: absolute;
+
       width: 100%;
       height: 100%;
+
       border-radius: 50%;
+
       background: #0b1128;
-      left: 22%;
-      top: -9%;
-      opacity: .97;
+
+      left: 28%;
+      top: -7%;
     }
 
-    @keyframes moonBreath {
-      0%, 100% {
-        transform: translate3d(0, 0, 0);
-        box-shadow:
-          0 0 22px rgba(255, 246, 216, .20),
-          0 0 70px rgba(229, 219, 255, .16);
-      }
-
-      50% {
-        transform: translate3d(0, -4px, 0);
-        box-shadow:
-          0 0 28px rgba(255, 246, 216, .25),
-          0 0 90px rgba(229, 219, 255, .19);
-      }
-    }
-
-    /* Stars */
-    .stars,
-    .shooting-stars {
+    /* stars are generated into this container */
+    #introStars {
       position: absolute;
       inset: 0;
       pointer-events: none;
     }
 
-    .star {
+    .intro-star {
       position: absolute;
+
+      width: 2px;
+      height: 2px;
+
       border-radius: 50%;
-      background: #fff;
-      box-shadow: 0 0 8px rgba(255,255,255,.55);
-      animation: twinkle ease-in-out infinite;
+
+      background: rgba(255,255,255,.9);
+
+      will-change: opacity, transform;
     }
 
-    @keyframes twinkle {
+    .intro-star.twinkle {
+      animation: starTwinkle 3.8s ease-in-out infinite;
+    }
+
+    @keyframes starTwinkle {
       0%, 100% {
-        opacity: .22;
-        transform: scale(.85);
+        opacity: .20;
+        transform: scale(.78);
       }
 
       50% {
-        opacity: .95;
-        transform: scale(1.15);
+        opacity: .88;
+        transform: scale(1.12);
       }
     }
 
-    .shooting-star {
+    /* moving star */
+    #memoryStar {
       position: absolute;
-      width: 95px;
-      height: 1px;
 
-      background: linear-gradient(
-        90deg,
-        rgba(255,255,255,0),
-        rgba(255,255,255,.6),
-        rgba(255,255,255,0)
-      );
+      width: 5px;
+      height: 5px;
 
-      transform: rotate(-28deg);
+      left: 67%;
+      top: 29%;
+
+      border-radius: 50%;
+
+      background: white;
+
+      box-shadow:
+        0 0 7px rgba(255,255,255,.95),
+        0 0 22px rgba(255,255,255,.65);
+
       opacity: 0;
-
-      animation: shooting 8s linear infinite;
+      pointer-events: none;
     }
 
-    @keyframes shooting {
-      0%, 72% {
+    #memoryStar.fly {
+      animation:
+        starJourney 1.9s cubic-bezier(.2,.78,.22,1) forwards;
+    }
+
+    @keyframes starJourney {
+      0% {
         opacity: 0;
-        transform: translate3d(0, 0, 0) rotate(-28deg);
+        transform: translate3d(0, 0, 0) scale(.5);
       }
 
-      74% {
-        opacity: .65;
-      }
-
-      80% {
-        opacity: 0;
-        transform: translate3d(-220px, 150px, 0) rotate(-28deg);
+      12% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
       }
 
       100% {
         opacity: 0;
+        transform:
+          translate3d(-150px, 120px, 0)
+          scale(.25);
       }
     }
 
-    /* Thin cloud */
-    .cloud {
+    /* soft moving clouds
+       no filter / blur on mobile-critical layers */
+    .night-cloud {
       position: absolute;
-      width: 600px;
-      height: 150px;
+
+      width: 480px;
+      height: 95px;
+
       border-radius: 50%;
-      filter: blur(20px);
-      opacity: .045;
-      background: #d8caff;
-      will-change: transform;
-      animation: cloudMove 26s ease-in-out infinite alternate;
+
+      background: rgba(177, 165, 220, .035);
+
+      animation: cloudMove 28s ease-in-out infinite alternate;
     }
 
-    .cloud.one {
-      right: -200px;
-      top: 50%;
+    .night-cloud.one {
+      right: -160px;
+      top: 48%;
     }
 
-    .cloud.two {
-      left: -250px;
-      top: 65%;
-      width: 500px;
+    .night-cloud.two {
+      left: -180px;
+      top: 66%;
+
+      width: 420px;
+      animation-duration: 35s;
       animation-delay: -8s;
-      animation-duration: 34s;
     }
 
     @keyframes cloudMove {
       from {
         transform: translate3d(0, 0, 0);
       }
+
       to {
-        transform: translate3d(80px, 20px, 0);
+        transform: translate3d(70px, 14px, 0);
       }
     }
 
-    /* Intro content */
+    /* Intro text */
     .intro-content {
       position: relative;
-      z-index: 5;
+      z-index: 20;
 
       width: min(850px, calc(100% - 32px));
-      min-height: 100%;
+      height: 100%;
 
       margin: auto;
 
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
 
       text-align: center;
     }
 
-    .story-line {
-      min-height: 110px;
+    .story {
+      position: absolute;
+
+      width: 100%;
+
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-    }
 
-    .story-line p {
-      color: rgba(255,255,255,.74);
-      font-size: clamp(1rem, 2.8vw, 1.28rem);
-      font-weight: 300;
-      line-height: 2;
       opacity: 0;
-      transform: translateY(12px);
+      transform: translateY(10px);
+
       transition:
         opacity .9s ease,
         transform .9s ease;
     }
 
-    .story-line p.visible {
+    .story.show {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .story-line .date {
-      margin-bottom: 8px;
-      font-size: clamp(.82rem, 2vw, .98rem);
-      color: rgba(255,255,255,.42);
-      letter-spacing: .2px;
+    .story-date {
+      color: rgba(255,255,255,.40);
+
+      font-size: clamp(.8rem, 2vw, .95rem);
+
+      margin-bottom: 10px;
     }
 
-    .story-line .main {
-      color: rgba(255,255,255,.84);
+    .story-text {
+      color: rgba(255,255,255,.80);
+
+      font-size: clamp(1rem, 3vw, 1.3rem);
+
+      line-height: 2;
+      font-weight: 300;
     }
 
-    .midnight {
-      margin-top: 25px;
+    /* countdown */
+    #midnightStage {
+      position: absolute;
+
+      width: 100%;
 
       display: flex;
       flex-direction: column;
       align-items: center;
 
       opacity: 0;
-      transform: translateY(15px);
-      transition: opacity .8s ease, transform .8s ease;
+      transform: translateY(12px);
+
+      transition:
+        opacity .7s ease,
+        transform .7s ease;
     }
 
-    .midnight.visible {
+    #midnightStage.show {
       opacity: 1;
       transform: translateY(0);
     }
 
     .countdown-number {
-      font-size: clamp(3rem, 10vw, 6rem);
+      color: rgba(255,255,255,.95);
+
+      font-size: clamp(3rem, 10vw, 6.3rem);
+
       line-height: 1;
       font-weight: 300;
-      color: rgba(255,255,255,.95);
-      letter-spacing: -2px;
-      font-variant-numeric: tabular-nums;
 
-      text-shadow:
-        0 0 30px rgba(255,255,255,.06);
+      font-variant-numeric: tabular-nums;
+      direction: ltr;
     }
 
     .countdown-label {
-      margin-top: 12px;
-      color: rgba(255,255,255,.36);
+      margin-top: 13px;
+
+      color: rgba(255,255,255,.34);
+
       font-size: .72rem;
     }
 
-    .transition-date {
-      margin-top: 15px;
+    .new-date {
+      margin-top: 18px;
 
-      font-size: clamp(1rem, 3vw, 1.3rem);
-      color: rgba(255,255,255,.78);
+      color: rgba(255,255,255,.76);
+
+      font-size: clamp(.95rem, 3vw, 1.22rem);
 
       opacity: 0;
-      transform: translateY(10px) scale(.98);
+      transform: translateY(8px);
 
       transition:
-        opacity .9s ease,
-        transform .9s ease;
+        opacity .8s ease,
+        transform .8s ease;
     }
 
-    .transition-date.show {
+    .new-date.show {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0);
     }
 
-    /* Special moment */
-    .ghazal-moment {
+    /* Ghazal reveal */
+    #ghazalMoment {
       position: absolute;
+
+      width: 100%;
 
       display: flex;
       flex-direction: column;
       align-items: center;
 
       opacity: 0;
-      transform: translateY(18px) scale(.97);
-
-      pointer-events: none;
+      transform: translateY(15px) scale(.98);
 
       transition:
         opacity 1.2s ease,
         transform 1.2s ease;
     }
 
-    .ghazal-moment.show {
+    #ghazalMoment.show {
       opacity: 1;
       transform: translateY(0) scale(1);
     }
 
-    .ghazal-moment .line {
-      color: rgba(255,255,255,.66);
-      font-size: .95rem;
-      margin-bottom: 15px;
+    .ghazal-line {
+      color: rgba(255,255,255,.57);
+
+      font-size: clamp(.9rem, 2.4vw, 1rem);
+
+      margin-bottom: 14px;
     }
 
-    .ghazal-moment .name {
-      font-size: clamp(3.7rem, 15vw, 7rem);
-      line-height: 1.15;
+    .ghazal-name {
+      color: white;
+
+      font-size: clamp(4rem, 15vw, 7.2rem);
+
       font-weight: 800;
-      letter-spacing: -1px;
 
-      color: #fff;
+      line-height: 1.18;
+
+      padding: 0 .18em .10em;
+
       text-shadow:
-        0 0 10px rgba(255,255,255,.12),
-        0 0 30px rgba(246, 166, 201, .14);
+        0 0 10px rgba(255,255,255,.08),
+        0 0 28px rgba(247,158,196,.14);
     }
 
-    .ghazal-moment .sub {
-      margin-top: 10px;
-      color: rgba(255,255,255,.54);
-      font-size: .9rem;
+    .ghazal-sub {
+      margin-top: 9px;
+
+      color: rgba(255,255,255,.53);
+
+      font-size: .88rem;
     }
 
-    .memory-star {
+    /* Sunrise */
+    #sunrise {
       position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: white;
-      box-shadow:
-        0 0 8px rgba(255,255,255,.9),
-        0 0 25px rgba(255,255,255,.65);
+      inset: 0;
+
+      pointer-events: none;
 
       opacity: 0;
-      transform: scale(.4);
+
+      background:
+        radial-gradient(
+          ellipse at 50% 115%,
+          rgba(255,190,215,.88) 0%,
+          rgba(255,210,224,.44) 19%,
+          rgba(224,207,246,.22) 38%,
+          transparent 69%
+        );
+
+      transition: opacity 2.4s ease;
     }
 
-    .memory-star.fly {
-      animation: memoryFly 1.8s cubic-bezier(.22,.8,.25,1) forwards;
-    }
-
-    @keyframes memoryFly {
-      0% {
-        opacity: 0;
-        transform: translate3d(0,0,0) scale(.4);
-      }
-
-      12% {
-        opacity: 1;
-        transform: translate3d(0,0,0) scale(1);
-      }
-
-      100% {
-        opacity: 0;
-        transform: translate3d(-170px,120px,0) scale(.25);
-      }
+    #sunrise.show {
+      opacity: 1;
     }
 
     .skip-intro {
       position: absolute;
-      z-index: 20;
-      bottom: 25px;
+      z-index: 30;
+
       left: 50%;
+      bottom: calc(22px + var(--safe-bottom));
+
       transform: translateX(-50%);
 
       border: 0;
+
       background: transparent;
 
-      color: rgba(255,255,255,.32);
+      color: rgba(255,255,255,.30);
 
-      font-family: inherit;
       font-size: .72rem;
 
       cursor: pointer;
-
-      transition: color .2s ease;
     }
 
     .skip-intro:hover {
-      color: rgba(255,255,255,.7);
+      color: rgba(255,255,255,.68);
     }
 
-    /* Sunrise layer */
-    .sunrise {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-
-      background:
-        radial-gradient(
-          ellipse at 50% 120%,
-          rgba(255, 185, 214, .95) 0%,
-          rgba(255, 210, 224, .55) 17%,
-          rgba(220, 200, 245, .28) 38%,
-          rgba(255,255,255,0) 68%
-        );
-
-      opacity: 0;
-      transform: scale(1.08);
-      transition:
-        opacity 2.5s ease,
-        transform 3s ease;
-    }
-
-    .sunrise.show {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    /* =========================================================
-       MAIN PAGE
-       ========================================================= */
+    /* =====================================================
+       MAIN SITE
+       ===================================================== */
 
     #site {
       opacity: 0;
-      transform: translateY(20px);
-      transition:
-        opacity 1.3s ease,
-        transform 1.3s ease;
+
+      transition: opacity 1.2s ease;
     }
 
     #site.visible {
       opacity: 1;
-      transform: translateY(0);
     }
 
-    .main-glow {
+    /* main decorative blobs
+       NO filter blur */
+    .main-decoration {
       position: fixed;
-      width: 290px;
-      height: 290px;
+      width: 250px;
+      height: 250px;
+
       border-radius: 50%;
+
+      opacity: .12;
+
       pointer-events: none;
-      z-index: -3;
-      opacity: .20;
-      filter: blur(60px);
-      will-change: transform;
-      animation: mainGlow 14s ease-in-out infinite alternate;
+
+      z-index: -2;
+
+      animation: decorationFloat 15s ease-in-out infinite alternate;
     }
 
-    .main-glow.one {
-      top: -105px;
-      right: -75px;
-      background: #ff9bbf;
+    .main-decoration.one {
+      top: -100px;
+      right: -80px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,150,190,.8),
+          rgba(255,150,190,0)
+        );
     }
 
-    .main-glow.two {
-      bottom: -105px;
+    .main-decoration.two {
+      bottom: -100px;
       left: -80px;
-      background: #bda3ff;
-      animation-delay: -5s;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(184,150,255,.8),
+          rgba(184,150,255,0)
+        );
+
+      animation-delay: -6s;
     }
 
-    @keyframes mainGlow {
+    @keyframes decorationFloat {
       from {
-        transform: translate3d(0,0,0) scale(1);
+        transform: translate3d(0,0,0);
       }
+
       to {
-        transform: translate3d(25px,20px,0) scale(1.08);
+        transform: translate3d(20px,18px,0);
       }
     }
 
-    .particles {
+    /* particles */
+    #mainParticles {
       position: fixed;
       inset: 0;
-      pointer-events: none;
+
       overflow: hidden;
-      z-index: 3;
+
+      pointer-events: none;
+
+      z-index: 2;
     }
 
-    .particle {
+    .main-particle {
       position: absolute;
-      top: -30px;
-      opacity: .3;
-      will-change: transform;
-      animation: falling linear infinite;
+      top: -25px;
+
+      opacity: .22;
+
+      animation: falling 10s linear infinite;
     }
 
     @keyframes falling {
       from {
-        transform: translate3d(0,-40px,0) rotate(0deg);
+        transform: translate3d(0,-30px,0) rotate(0deg);
       }
+
       to {
-        transform: translate3d(32px,110vh,0) rotate(300deg);
+        transform: translate3d(25px,110vh,0) rotate(260deg);
       }
     }
 
-    /* Navbar */
+    /* navbar */
     .nav {
       width: min(1080px, calc(100% - 32px));
-      margin: 18px auto 0;
+
+      margin:
+        calc(14px + var(--safe-top))
+        auto
+        0;
+
       padding: 13px 18px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      background: rgba(255,255,255,.65);
-      border: 1px solid rgba(255,255,255,.95);
+      background: rgba(255,255,255,.72);
+
+      border: 1px solid var(--border);
       border-radius: 20px;
 
-      box-shadow: var(--shadow-soft);
+      box-shadow: var(--shadow);
 
       position: relative;
-      z-index: 20;
+      z-index: 10;
     }
 
     .brand {
@@ -607,14 +689,19 @@
     }
 
     .nav-links a {
-      text-decoration: none;
       color: var(--muted);
-      font-size: .84rem;
+
+      text-decoration: none;
 
       padding: 8px 13px;
+
       border-radius: 12px;
 
-      transition: color .2s ease, background-color .2s ease;
+      font-size: .84rem;
+
+      transition:
+        background-color .2s ease,
+        color .2s ease;
     }
 
     .nav-links a:hover {
@@ -622,12 +709,14 @@
       background: #fff0f6;
     }
 
-    /* Hero */
+    /* hero */
     .hero {
       width: min(1080px, calc(100% - 32px));
-      min-height: calc(100vh - 78px);
+
+      min-height: calc(100vh - 90px);
 
       margin: auto;
+
       padding: 58px 0 90px;
 
       display: flex;
@@ -642,33 +731,37 @@
       max-width: 900px;
     }
 
-    .heart-orbit {
+    .hero-heart {
       width: 76px;
       height: 76px;
+
       margin: 0 auto 20px;
 
       display: grid;
       place-items: center;
 
-      background: rgba(255,255,255,.83);
-      border: 1px solid white;
       border-radius: 50%;
 
+      background: rgba(255,255,255,.84);
+
+      border: 1px solid white;
+
       box-shadow:
-        0 14px 45px rgba(223,90,140,.18),
-        inset 0 0 0 8px rgba(255,241,247,.7);
+        0 14px 45px rgba(223,90,140,.17),
+        inset 0 0 0 8px rgba(255,241,247,.72);
 
       animation: heartPulse 1.8s ease-in-out infinite;
     }
 
-    .heart-orbit span {
+    .hero-heart span {
       font-size: 2rem;
     }
 
     @keyframes heartPulse {
-      0%,100% {
+      0%, 100% {
         transform: scale(1);
       }
+
       50% {
         transform: scale(1.08);
       }
@@ -676,46 +769,59 @@
 
     .small-title {
       color: var(--pink);
+
       font-size: .86rem;
       font-weight: 600;
-      margin-bottom: 9px;
+
+      margin-bottom: 8px;
     }
 
-    .name {
+    .hero-name {
       display: inline-block;
+
       max-width: calc(100vw - 48px);
 
-      padding: 0 .17em .12em;
+      padding: 0 .17em .13em;
 
       font-size: clamp(3.3rem, 13vw, 6.5rem);
+
       line-height: 1.22;
+
       font-weight: 800;
+
       letter-spacing: -1.5px;
 
-      background: linear-gradient(
-        120deg,
-        #d94c82 0%,
-        #ee769f 42%,
-        #a275d1 100%
-      );
+      background:
+        linear-gradient(
+          120deg,
+          #d94c82,
+          #ee769f 42%,
+          #a275d1
+        );
 
       -webkit-background-clip: text;
       background-clip: text;
+
       color: transparent;
     }
 
-    .romantic-line {
+    .hero-description {
       max-width: 720px;
+
       margin: 13px auto 0;
 
       color: #705b68;
-      font-size: clamp(1rem, 2vw, 1.18rem);
+
+      font-size: clamp(1rem,2vw,1.18rem);
+
       line-height: 2;
     }
 
     .date-line {
       margin-top: 14px;
+
       color: var(--soft);
+
       font-size: .82rem;
     }
 
@@ -723,14 +829,18 @@
       color: var(--pink-dark);
     }
 
-    /* Counter */
+    /* counter */
     .counter-card {
       max-width: 860px;
+
       margin: 32px auto 0;
+
       padding: 24px;
 
-      background: rgba(255,255,255,.69);
-      border: 1px solid rgba(255,255,255,.95);
+      background: rgba(255,255,255,.76);
+
+      border: 1px solid var(--border);
+
       border-radius: 30px;
 
       box-shadow: var(--shadow);
@@ -757,42 +867,59 @@
     .counter-item {
       padding: 19px 8px 17px;
 
-      background: rgba(255,255,255,.80);
-      border: 1px solid rgba(255,255,255,.95);
+      background: rgba(255,255,255,.84);
+
+      border: 1px solid rgba(255,255,255,.98);
+
       border-radius: 20px;
 
-      box-shadow: 0 8px 22px rgba(145,104,135,.05);
+      box-shadow:
+        0 7px 20px rgba(145,104,135,.04);
 
-      transition: transform .2s ease, box-shadow .2s ease;
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
     }
 
     .counter-item:hover {
       transform: translateY(-3px);
-      box-shadow: 0 14px 28px rgba(145,104,135,.09);
+
+      box-shadow:
+        0 12px 26px rgba(145,104,135,.08);
     }
 
     .counter-number {
       direction: ltr;
+
       font-size: clamp(1.6rem,4vw,2.55rem);
+
       line-height: 1;
+
       font-weight: 800;
+
       color: var(--pink);
+
       font-variant-numeric: tabular-nums;
     }
 
     .counter-label {
       margin-top: 9px;
+
       color: var(--muted);
+
       font-size: .75rem;
     }
 
     .today-box {
       margin-top: 18px;
+
       padding-top: 17px;
 
-      border-top: 1px solid rgba(160,130,150,.12);
+      border-top:
+        1px solid rgba(160,130,150,.12);
 
       color: #887581;
+
       font-size: .8rem;
     }
 
@@ -800,14 +927,16 @@
       color: var(--pink-dark);
     }
 
-    /* Buttons */
+    /* buttons */
     .actions {
       margin-top: 25px;
 
       display: flex;
       align-items: center;
       justify-content: center;
+
       flex-wrap: wrap;
+
       gap: 10px;
     }
 
@@ -819,12 +948,14 @@
       align-items: center;
       justify-content: center;
 
+      min-height: 44px;
+
       padding: 12px 20px;
 
-      font: inherit;
+      border-radius: 15px;
+
       font-size: .86rem;
 
-      border-radius: 15px;
       text-decoration: none;
 
       transition:
@@ -835,29 +966,43 @@
 
     .btn-primary {
       color: white;
-      background: linear-gradient(135deg,#e15a8b,#ae77d2);
-      box-shadow: 0 12px 28px rgba(220,82,137,.2);
+
+      background:
+        linear-gradient(
+          135deg,
+          #e15a8b,
+          #ae77d2
+        );
+
+      box-shadow:
+        0 12px 28px rgba(220,82,137,.20);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 16px 32px rgba(220,82,137,.27);
+
+      box-shadow:
+        0 16px 32px rgba(220,82,137,.27);
     }
 
     .btn-secondary {
       color: var(--pink);
-      background: rgba(255,255,255,.75);
-      border: 1px solid rgba(223,90,140,.14);
+
+      background: rgba(255,255,255,.78);
+
+      border:
+        1px solid rgba(223,90,140,.14);
     }
 
     .btn-secondary:hover {
       transform: translateY(-2px);
-      background: #fff;
+      background: white;
     }
 
-    /* Sections */
+    /* sections */
     section {
       width: min(1000px, calc(100% - 32px));
+
       margin: 0 auto 95px;
     }
 
@@ -868,18 +1013,24 @@
 
     .section-title span {
       display: block;
+
       color: var(--pink);
+
       font-size: .79rem;
+
       font-weight: 700;
+
       margin-bottom: 7px;
     }
 
     .section-title h2 {
-      font-size: clamp(1.7rem,4vw,2.5rem);
       color: #4a3e47;
+
+      font-size:
+        clamp(1.7rem,4vw,2.5rem);
     }
 
-    /* Cards */
+    /* cards */
     .cards {
       display: grid;
       grid-template-columns: repeat(3,1fr);
@@ -889,18 +1040,24 @@
     .card {
       padding: 27px 22px;
 
-      background: rgba(255,255,255,.70);
-      border: 1px solid rgba(255,255,255,.95);
+      background: rgba(255,255,255,.76);
+
+      border: 1px solid var(--border);
+
       border-radius: 25px;
 
       box-shadow: var(--shadow);
 
-      transition: transform .3s ease, box-shadow .3s ease;
+      transition:
+        transform .3s ease,
+        box-shadow .3s ease;
     }
 
     .card:hover {
       transform: translateY(-7px);
-      box-shadow: 0 28px 60px rgba(140,91,126,.14);
+
+      box-shadow:
+        0 28px 60px rgba(140,91,126,.13);
     }
 
     .card-icon {
@@ -915,20 +1072,25 @@
 
     .card p {
       color: var(--muted);
+
       font-size: .87rem;
+
       line-height: 2;
     }
 
-    /* Letter */
+    /* letter */
     .letter {
       position: relative;
+
       overflow: hidden;
 
-      padding: clamp(28px,6vw,60px);
+      padding:
+        clamp(28px,6vw,60px);
 
-      background: rgba(255,255,255,.84);
+      background: rgba(255,255,255,.87);
 
-      border: 1px solid rgba(255,255,255,.95);
+      border: 1px solid var(--border);
+
       border-radius: 30px;
 
       box-shadow: var(--shadow);
@@ -936,23 +1098,32 @@
 
     .letter::before {
       content: "♥";
+
       position: absolute;
+
       left: -28px;
       bottom: -90px;
 
       font-size: 17rem;
+
       line-height: 1;
+
       color: rgba(223,90,140,.045);
 
       transform: rotate(-12deg);
+
+      pointer-events: none;
     }
 
     .letter-top {
       text-align: right;
+
       margin-bottom: 22px;
 
       color: var(--pink);
+
       font-size: .88rem;
+
       font-weight: 700;
     }
 
@@ -961,8 +1132,11 @@
       z-index: 1;
 
       color: #645761;
+
       font-size: .96rem;
+
       line-height: 2.45;
+
       margin-bottom: 14px;
     }
 
@@ -971,25 +1145,30 @@
       z-index: 1;
 
       margin-top: 28px;
+
       text-align: left;
 
       color: var(--pink-dark);
+
       font-weight: 700;
     }
 
-    /* Final */
+    /* final */
     .final {
       text-align: center;
+
       padding: 65px 22px;
 
       background:
         linear-gradient(
           135deg,
-          rgba(255,224,238,.75),
-          rgba(232,223,255,.72)
+          rgba(255,224,238,.77),
+          rgba(232,223,255,.74)
         );
 
-      border: 1px solid rgba(255,255,255,.95);
+      border:
+        1px solid rgba(255,255,255,.95);
+
       border-radius: 34px;
 
       box-shadow: var(--shadow);
@@ -997,44 +1176,76 @@
 
     .final-heart {
       font-size: 3.6rem;
+
       margin-bottom: 12px;
-      animation: heartPulse 1.7s ease-in-out infinite;
+
+      animation:
+        heartPulse 1.7s ease-in-out infinite;
     }
 
     .final h2 {
-      font-size: clamp(1.8rem,5vw,3rem);
+      font-size:
+        clamp(1.8rem,5vw,3rem);
+
       margin-bottom: 12px;
     }
 
     .final p {
       color: var(--muted);
+
       line-height: 2;
+
       margin-bottom: 23px;
     }
 
     footer {
-      padding: 15px 15px 35px;
+      padding:
+        15px
+        15px
+        calc(35px + var(--safe-bottom));
+
       text-align: center;
+
       color: #a497a2;
+
       font-size: .76rem;
     }
 
-    /* Lightweight modal */
-    .modal {
+    /* =====================================================
+       MODAL
+       IMPORTANT:
+       This is a direct child of BODY.
+       No transformed ancestor.
+       No backdrop-filter.
+       ===================================================== */
+
+    #modalRoot {
       position: fixed;
       inset: 0;
-      z-index: 1000;
+
+      z-index: 10000;
+
+      pointer-events: none;
+    }
+
+    .modal {
+      position: absolute;
+      inset: 0;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      padding: 20px;
+      padding:
+        20px
+        20px
+        calc(20px + var(--safe-bottom));
 
-      background: rgba(55,37,49,.36);
+      background: rgba(44, 30, 42, .38);
 
       opacity: 0;
       visibility: hidden;
+
       pointer-events: none;
 
       transition:
@@ -1042,7 +1253,7 @@
         visibility 0s linear .18s;
     }
 
-    .modal.is-open {
+    .modal.open {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
@@ -1053,76 +1264,120 @@
     }
 
     .modal-box {
-      width: min(500px,100%);
-      padding: 38px 27px;
+      width: min(500px, 100%);
 
-      background: white;
-      border: 1px solid white;
+      padding: 36px 25px;
+
+      background: #fff;
+
+      border: 1px solid #fff;
+
       border-radius: 28px;
 
-      box-shadow: 0 25px 80px rgba(50,30,48,.18);
+      box-shadow:
+        0 25px 70px rgba(50,30,48,.20);
 
-      transform: translateY(12px) scale(.97);
-      transition: transform .18s ease;
+      opacity: 0;
+
+      transform: scale(.96);
+
+      transition:
+        opacity .18s ease,
+        transform .18s ease;
     }
 
-    .modal.is-open .modal-box {
-      transform: translateY(0) scale(1);
+    .modal.open .modal-box {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .modal-symbol {
       text-align: center;
+
       font-size: 2.8rem;
+
       margin-bottom: 10px;
     }
 
     .modal-box h2 {
       text-align: center;
+
       color: var(--pink-dark);
-      margin-bottom: 13px;
+
+      margin-bottom: 14px;
     }
 
     .modal-box p {
-      color: var(--muted);
       text-align: center;
-      line-height: 2.2;
+
+      color: var(--muted);
+
       font-size: .91rem;
+
+      line-height: 2.2;
+    }
+
+    .modal-box p strong {
+      color: var(--pink-dark);
     }
 
     .modal-close {
-      display: block;
+      display: flex;
+
       margin: 23px auto 0;
     }
 
-    /* Click hearts */
+    /* click hearts */
     .click-heart {
       position: fixed;
-      z-index: 2000;
+
+      z-index: 11000;
+
       pointer-events: none;
 
       font-size: 16px;
 
       will-change: transform, opacity;
 
-      animation: clickHeart .8s ease-out forwards;
+      animation:
+        clickHeart .8s ease-out forwards;
     }
 
     @keyframes clickHeart {
-      0% {
+      from {
         opacity: 1;
-        transform: translate3d(0,0,0) scale(.9);
+
+        transform:
+          translate3d(0,0,0)
+          scale(.9);
       }
 
-      100% {
+      to {
         opacity: 0;
-        transform: translate3d(0,-65px,0) scale(1.45);
+
+        transform:
+          translate3d(0,-60px,0)
+          scale(1.4);
       }
     }
 
-    /* Mobile */
+    /* =====================================================
+       MOBILE
+       ===================================================== */
+
     @media (max-width: 760px) {
+
+      .moon-wrap {
+        width: 110px;
+        height: 110px;
+
+        top: max(8vh, 58px);
+        right: 7%;
+      }
+
       .nav {
-        margin-top: 12px;
+        margin-top:
+          calc(10px + var(--safe-top));
       }
 
       .nav-links {
@@ -1146,17 +1401,17 @@
         padding: 32px 21px;
       }
 
-      .moon {
-        top: 9%;
-        right: 8%;
+      .story-text {
+        max-width: 310px;
       }
 
-      .ghazal-moment .sub {
-        font-size: .78rem;
+      .ghazal-name {
+        font-size: clamp(3.7rem, 17vw, 6rem);
       }
     }
 
     @media (max-width: 420px) {
+
       .counter-card {
         padding: 15px;
       }
@@ -1176,6 +1431,14 @@
       .counter-label {
         font-size: .68rem;
       }
+
+      .hero-description {
+        font-size: .94rem;
+      }
+
+      .romantic-line {
+        font-size: .93rem;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1191,53 +1454,49 @@
   </style>
 </head>
 
-<body class="intro-active">
+<body class="lock-scroll">
 
-  <!-- =======================================================
+  <!-- =====================================================
        INTRO
-       ======================================================= -->
+       ===================================================== -->
 
-  <div class="intro" id="intro">
+  <div id="intro">
 
-    <div class="intro-night"></div>
+    <div class="intro-layer night-vignette"></div>
 
-    <div class="cloud one"></div>
-    <div class="cloud two"></div>
-
-    <div class="stars" id="introStars"></div>
-    <div class="shooting-stars">
-      <div
-        class="shooting-star"
-        style="top: 24%; left: 65%; animation-delay: 1s;"
-      ></div>
-
-      <div
-        class="shooting-star"
-        style="top: 38%; left: 30%; animation-delay: 5s;"
-      ></div>
+    <div class="moon-wrap">
+      <div class="moon"></div>
     </div>
 
-    <div class="moon"></div>
+    <div id="introStars"></div>
 
-    <div class="sunrise" id="sunrise"></div>
+    <div class="night-cloud one"></div>
+    <div class="night-cloud two"></div>
+
+    <div id="sunrise"></div>
 
     <div class="intro-content">
 
-      <!-- First line -->
-      <div class="story-line" id="storyOne">
-        <p class="date">۱۹ خرداد ۱۴۰۵</p>
+      <!-- Story 1 -->
+      <div class="story" id="storyOne">
 
-        <p class="main">
+        <div class="story-date">
+          ۱۹ خرداد ۱۴۰۵
+        </div>
+
+        <div class="story-text">
           تا اون شب، همه‌چیز معمولی بود...
-        </p>
+        </div>
+
       </div>
 
+
       <!-- Countdown -->
-      <div class="midnight" id="midnight">
+      <div id="midnightStage">
 
         <div
           class="countdown-number"
-          id="countdownNumber"
+          id="introCountdown"
         >
           ۵
         </div>
@@ -1247,37 +1506,38 @@
         </div>
 
         <div
-          class="transition-date"
-          id="transitionDate"
+          class="new-date"
+          id="newDate"
         >
           ۲۰ خرداد ۱۴۰۵
         </div>
 
       </div>
 
-      <!-- Ghazal moment -->
-      <div class="ghazal-moment" id="ghazalMoment">
 
-        <div class="line">
+      <!-- Ghazal -->
+      <div id="ghazalMoment">
+
+        <div class="ghazal-line">
           تا اینکه...
         </div>
 
-        <div class="name">
+        <div class="ghazal-name">
           غزال
         </div>
 
-        <div class="sub">
+        <div class="ghazal-sub">
           رو دیدم. ❤️
         </div>
 
       </div>
 
-      <div
-        class="memory-star"
-        id="memoryStar"
-      ></div>
-
     </div>
+
+
+    <!-- special moving star -->
+    <div id="memoryStar"></div>
+
 
     <button
       class="skip-intro"
@@ -1290,16 +1550,17 @@
   </div>
 
 
-  <!-- =======================================================
-       MAIN SITE
-       ======================================================= -->
+  <!-- =====================================================
+       MAIN WEBSITE
+       ===================================================== -->
 
   <div id="site">
 
-    <div class="main-glow one"></div>
-    <div class="main-glow two"></div>
+    <div class="main-decoration one"></div>
+    <div class="main-decoration two"></div>
 
-    <div class="particles" id="particles"></div>
+    <div id="mainParticles"></div>
+
 
     <!-- Navbar -->
     <nav class="nav">
@@ -1309,10 +1570,21 @@
       </div>
 
       <ul class="nav-links">
-        <li><a href="#home">شروع</a></li>
-        <li><a href="#meaning">چرا تو؟</a></li>
-        <li><a href="#letter">نامه</a></li>
-        <li><a href="#end">آخرش</a></li>
+        <li>
+          <a href="#home">شروع</a>
+        </li>
+
+        <li>
+          <a href="#meaning">چرا تو؟</a>
+        </li>
+
+        <li>
+          <a href="#letter">نامه</a>
+        </li>
+
+        <li>
+          <a href="#end">آخرش</a>
+        </li>
       </ul>
 
     </nav>
@@ -1323,7 +1595,7 @@
 
       <div class="hero-content">
 
-        <div class="heart-orbit">
+        <div class="hero-heart">
           <span>❤️</span>
         </div>
 
@@ -1331,13 +1603,14 @@
           از یک روز خاص شروع شد...
         </div>
 
-        <div class="name">
+        <div class="hero-name">
           غزال
         </div>
 
-        <p class="romantic-line">
-          بعضی آدم‌ها وارد زندگی آدم نمی‌شوند که فقط یک خاطره باشند؛
-          می‌آیند تا خودِ معنیِ بعضی لحظه‌ها را عوض کنند.
+        <p class="hero-description">
+          تا ۱۹ خرداد همه‌چیز معمولی بود؛
+          تا اینکه ۲۰ خرداد تو رو دیدم
+          و یک تاریخ ساده تبدیل شد به شروع یک داستان.
         </p>
 
         <div class="date-line">
@@ -1362,7 +1635,10 @@
           <div class="counter">
 
             <div class="counter-item">
-              <div class="counter-number" id="days">
+              <div
+                class="counter-number"
+                id="days"
+              >
                 ۰
               </div>
 
@@ -1371,8 +1647,12 @@
               </div>
             </div>
 
+
             <div class="counter-item">
-              <div class="counter-number" id="hours">
+              <div
+                class="counter-number"
+                id="hours"
+              >
                 ۰
               </div>
 
@@ -1381,8 +1661,12 @@
               </div>
             </div>
 
+
             <div class="counter-item">
-              <div class="counter-number" id="minutes">
+              <div
+                class="counter-number"
+                id="minutes"
+              >
                 ۰
               </div>
 
@@ -1391,8 +1675,12 @@
               </div>
             </div>
 
+
             <div class="counter-item">
-              <div class="counter-number" id="seconds">
+              <div
+                class="counter-number"
+                id="seconds"
+              >
                 ۰
               </div>
 
@@ -1403,11 +1691,15 @@
 
           </div>
 
+
           <div class="today-box">
+
             امروز:
+
             <strong id="persianToday">
               در حال محاسبه...
             </strong>
+
           </div>
 
         </div>
@@ -1418,6 +1710,7 @@
           <button
             class="btn btn-primary"
             id="openLetterButton"
+            type="button"
           >
             💌 یه چیزی برای تو
           </button>
@@ -1436,7 +1729,7 @@
     </main>
 
 
-    <!-- Meaning -->
+    <!-- Why -->
     <section id="meaning">
 
       <div class="section-title">
@@ -1548,14 +1841,15 @@
         <p>
           اما ۲۰ خرداد تو را دیدم.
           و از همان لحظه،
-          یک تاریخ ساده تبدیل شد به تاریخی که ارزش شمردن داشت.
+          یک تاریخ ساده تبدیل شد به تاریخی که
+          ارزش شمردن داشت.
         </p>
 
         <p>
           از آن روز تا امروز، چیزی که می‌شمارم فقط روزها نیست.
           هر روزش یک خاطره است، هر ساعتش یک حس،
-          و هر ثانیه‌اش یادآور این است که یک نفر وارد زندگی‌ام شده
-          که حضورش برایم معمولی نیست.
+          و هر ثانیه‌اش یادآور این است که
+          یک نفر وارد زندگی‌ام شده که حضورش معمولی نیست.
         </p>
 
         <p>
@@ -1566,7 +1860,8 @@
         </p>
 
         <div class="signature">
-          برای غزال، که از ۲۰ خرداد به بعد، دنیا را کمی قشنگ‌تر کرد ♡
+          برای غزال، که از ۲۰ خرداد به بعد،
+          دنیا را کمی قشنگ‌تر کرد ♡
         </div>
 
       </div>
@@ -1588,12 +1883,14 @@
         </h2>
 
         <p>
-          هنوز هم هر ثانیه، ادامه‌ی همان لحظه‌ای است که غزال را دیدم.
+          هنوز هم هر ثانیه، ادامه‌ی همان لحظه‌ای است
+          که غزال را دیدم.
         </p>
 
         <button
           class="btn btn-primary"
           id="finalMessageButton"
+          type="button"
         >
           یه چیز دیگه هم هست...
         </button>
@@ -1607,8 +1904,16 @@
       ساخته شده با عشق، برای غزال ❤️
     </footer>
 
+  </div>
 
-    <!-- Lightweight Modal -->
+
+  <!-- =====================================================
+       MODAL
+       Direct child of BODY on purpose.
+       ===================================================== -->
+
+  <div id="modalRoot">
+
     <div
       class="modal"
       id="loveModal"
@@ -1619,30 +1924,36 @@
         class="modal-box"
         role="dialog"
         aria-modal="true"
+        aria-labelledby="modalTitle"
       >
 
         <div class="modal-symbol">
           💌
         </div>
 
-        <h2>
+        <h2 id="modalTitle">
           غزال...
         </h2>
 
         <p>
           تا ۱۹ خرداد همه‌چیز معمولی بود.
           <br><br>
+
           بعد ۲۰ خرداد تو رو دیدم،
           و یک روز معمولی تبدیل شد به
           <strong>شروع ما</strong>. ❤️
+
           <br><br>
+
           شاید برای بقیه فقط یک تاریخ باشه؛
-          برای من، روزی بود که تو وارد داستانم شدی.
+          برای من، روزی بود که
+          تو وارد داستانم شدی.
         </p>
 
         <button
           class="btn btn-primary modal-close"
           id="closeModalButton"
+          type="button"
         >
           ❤️ بستن
         </button>
@@ -1655,204 +1966,238 @@
 
 
   <script>
-    /* =========================================================
+    /* ======================================================
        INTRO
-       ========================================================= */
+       ====================================================== */
 
-    const intro = document.getElementById("intro");
-    const site = document.getElementById("site");
+    const intro =
+      document.getElementById("intro");
 
-    const storyOne = document.getElementById("storyOne");
-    const midnight = document.getElementById("midnight");
-    const countdownNumber = document.getElementById("countdownNumber");
-    const transitionDate = document.getElementById("transitionDate");
+    const site =
+      document.getElementById("site");
 
-    const ghazalMoment = document.getElementById("ghazalMoment");
-    const sunrise = document.getElementById("sunrise");
-    const memoryStar = document.getElementById("memoryStar");
+    const storyOne =
+      document.getElementById("storyOne");
 
-    const skipIntro = document.getElementById("skipIntro");
-    const introStars = document.getElementById("introStars");
+    const midnightStage =
+      document.getElementById("midnightStage");
+
+    const introCountdown =
+      document.getElementById("introCountdown");
+
+    const newDate =
+      document.getElementById("newDate");
+
+    const ghazalMoment =
+      document.getElementById("ghazalMoment");
+
+    const memoryStar =
+      document.getElementById("memoryStar");
+
+    const sunrise =
+      document.getElementById("sunrise");
+
+    const skipIntro =
+      document.getElementById("skipIntro");
+
+    const introStars =
+      document.getElementById("introStars");
 
 
     /*
-      ساخت ستاره‌ها
+      ============================================
+      Generate stars
+      ============================================
     */
 
-    for (let i = 0; i < 55; i++) {
+    function createIntroStars() {
 
-      const star = document.createElement("span");
+      const fragment =
+        document.createDocumentFragment();
 
-      star.className = "star";
+      const numberOfStars =
+        window.innerWidth < 700
+          ? 34
+          : 50;
 
-      const size = Math.random() > 0.82 ? 2.6 : 1.5;
+      for (let i = 0; i < numberOfStars; i++) {
 
-      star.style.width = `${size}px`;
-      star.style.height = `${size}px`;
+        const star =
+          document.createElement("span");
 
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 82}%`;
+        star.className =
+          "intro-star twinkle";
 
-      star.style.animationDuration =
-        `${2.8 + Math.random() * 4.5}s`;
+        const size =
+          Math.random() > .84
+            ? 2.5
+            : 1.5;
 
-      star.style.animationDelay =
-        `${Math.random() * 4}s`;
+        star.style.width =
+          `${size}px`;
 
-      introStars.appendChild(star);
+        star.style.height =
+          `${size}px`;
+
+        star.style.left =
+          `${Math.random() * 100}%`;
+
+        star.style.top =
+          `${Math.random() * 82}%`;
+
+        star.style.opacity =
+          `${.15 + Math.random() * .55}`;
+
+        star.style.animationDuration =
+          `${3 + Math.random() * 4}s`;
+
+        star.style.animationDelay =
+          `${Math.random() * 4}s`;
+
+        fragment.appendChild(star);
+      }
+
+      introStars.appendChild(fragment);
     }
 
+    createIntroStars();
+
 
     /*
-      نشان دادن متن اول
+      First sentence
     */
 
     setTimeout(() => {
-      storyOne.querySelector(".date").classList.add("visible");
-    }, 700);
-
-    setTimeout(() => {
-      storyOne.querySelector(".main").classList.add("visible");
-    }, 1500);
+      storyOne.classList.add("show");
+    }, 600);
 
 
     /*
-      شروع شمارش معکوس.
-      برای Intro مستقل از ساعت واقعی طراحی شده
-      تا روایت هر بار به شکل کنترل‌شده اجرا شود.
+      Countdown
     */
 
     setTimeout(() => {
 
-      midnight.classList.add("visible");
-
-      let current = 5;
-
-      countdownNumber.textContent =
-        current.toLocaleString("fa-IR");
-
-      const countdown = setInterval(() => {
-
-        current--;
-
-        if (current > 0) {
-
-          countdownNumber.textContent =
-            current.toLocaleString("fa-IR");
-
-        } else {
-
-          clearInterval(countdown);
-
-          countdownNumber.textContent = "۰۰:۰۰";
-
-          showMidnightMoment();
-        }
-
-      }, 900);
-
-    }, 3200);
-
-
-    /*
-      لحظه ۲۰ خرداد
-    */
-
-    function showMidnightMoment() {
-
-      transitionDate.classList.add("show");
-
-      /*
-        کمی مکث تا حس عبور از روز ایجاد شود.
-      */
+      storyOne.classList.remove("show");
 
       setTimeout(() => {
 
-        storyOne.style.opacity = "0";
-        midnight.style.opacity = "0";
+        midnightStage.classList.add("show");
 
-      }, 800);
+        let count = 5;
 
+        introCountdown.textContent =
+          count.toLocaleString("fa-IR");
+
+        const timer =
+          setInterval(() => {
+
+            count--;
+
+            if (count > 0) {
+
+              introCountdown.textContent =
+                count.toLocaleString("fa-IR");
+
+              return;
+            }
+
+            clearInterval(timer);
+
+            introCountdown.textContent =
+              "۰۰:۰۰";
+
+            newDate.classList.add("show");
+
+            setTimeout(
+              showGhazal,
+              900
+            );
+
+          }, 900);
+
+      }, 500);
+
+    }, 2800);
+
+
+    /*
+      Ghazal reveal
+    */
+
+    function showGhazal() {
+
+      midnightStage.style.opacity = "0";
 
       setTimeout(() => {
 
         ghazalMoment.classList.add("show");
 
-        /*
-          ستاره‌ی خاطره
-        */
-
-        memoryStar.style.left = "66%";
-        memoryStar.style.top = "28%";
-
         memoryStar.classList.add("fly");
 
-      }, 1250);
+      }, 500);
 
 
       /*
-        طلوع و تغییر آسمان
+        sunrise
       */
 
       setTimeout(() => {
         sunrise.classList.add("show");
-      }, 2800);
+      }, 2600);
 
 
       /*
-        ورود به سایت اصلی
+        enter site
       */
 
       setTimeout(() => {
         finishIntro();
-      }, 4700);
+      }, 4400);
     }
 
+
+    /*
+      Exit intro
+    */
 
     function finishIntro() {
 
       site.classList.add("visible");
 
-      /*
-        اجازه‌ی ورود انیمیشن خروج
-      */
+      intro.classList.add("intro-hidden");
 
-      requestAnimationFrame(() => {
-        intro.classList.add("hide");
-        document.body.classList.remove("intro-active");
-      });
-
-      /*
-        بعد از transition:
-        عنصر Intro از DOM نمایش خارج می‌شود.
-      */
+      document.body.classList.remove("lock-scroll");
 
       setTimeout(() => {
-        intro.setAttribute("aria-hidden", "true");
-      }, 1500);
+
+        /*
+          Keep the element out of the interaction tree
+          after its visual transition.
+        */
+
+        intro.style.display = "none";
+
+      }, 1400);
     }
 
 
-    /*
-      رد کردن Intro
-    */
-
-    skipIntro.addEventListener("click", () => {
-      finishIntro();
-    });
+    skipIntro.addEventListener(
+      "click",
+      finishIntro
+    );
 
 
-    /* =========================================================
+    /* ======================================================
        MAIN COUNTER
-       ========================================================= */
+       ====================================================== */
 
     /*
-      شروع رابطه:
       ۲۰ خرداد ۱۴۰۵
       = ۱۰ ژوئن ۲۰۲۶
 
-      ساعت شروع:
-      ۰۰:۰۰:۰۰
+      شروع شمارش:
+      ساعت ۰۰:۰۰:۰۰
     */
 
     const startDate =
@@ -1883,13 +2228,16 @@
 
 
     /*
-      امروز به فرم:
+      Persian date
+
+      Output:
       یکشنبه، ۱۵ شهریورماه ۱۴۰۵
     */
 
     function updatePersianToday() {
 
-      const now = new Date();
+      const now =
+        new Date();
 
       const formatter =
         new Intl.DateTimeFormat(
@@ -1935,34 +2283,42 @@
 
 
     /*
-      شمارش مدت رابطه
+      Relationship counter
     */
 
     function updateCounter() {
 
-      const now = new Date();
+      const now =
+        new Date();
 
       let difference =
-        now.getTime() - startDate.getTime();
+        now.getTime() -
+        startDate.getTime();
 
       if (difference < 0) {
         difference = 0;
       }
 
       const totalSeconds =
-        Math.floor(difference / 1000);
+        Math.floor(
+          difference / 1000
+        );
 
       const days =
-        Math.floor(totalSeconds / 86400);
+        Math.floor(
+          totalSeconds / 86400
+        );
 
       const hours =
         Math.floor(
-          (totalSeconds % 86400) / 3600
+          (totalSeconds % 86400) /
+          3600
         );
 
       const minutes =
         Math.floor(
-          (totalSeconds % 3600) / 60
+          (totalSeconds % 3600) /
+          60
         );
 
       const seconds =
@@ -1986,137 +2342,167 @@
     updateCounter();
     updatePersianToday();
 
-    setInterval(updateCounter, 1000);
+    setInterval(
+      updateCounter,
+      1000
+    );
 
-    setInterval(updatePersianToday, 60000);
+    setInterval(
+      updatePersianToday,
+      60000
+    );
 
 
-    /* =========================================================
+    /* ======================================================
        MAIN PARTICLES
-       ========================================================= */
+       ====================================================== */
 
-    const particles =
-      document.getElementById("particles");
+    const mainParticles =
+      document.getElementById("mainParticles");
 
-    const symbols = [
+    const particleSymbols = [
       "♡",
       "♥",
       "✿",
       "🌸"
     ];
 
-    for (let i = 0; i < 16; i++) {
 
-      const element =
-        document.createElement("span");
+    function createMainParticles() {
 
-      element.className = "particle";
+      const fragment =
+        document.createDocumentFragment();
 
-      element.textContent =
-        symbols[
-          Math.floor(
-            Math.random() * symbols.length
-          )
-        ];
+      const count =
+        window.innerWidth < 700
+          ? 8
+          : 13;
 
-      element.style.left =
-        `${Math.random() * 100}%`;
+      for (let i = 0; i < count; i++) {
 
-      element.style.fontSize =
-        `${11 + Math.random() * 9}px`;
+        const particle =
+          document.createElement("span");
 
-      element.style.animationDuration =
-        `${9 + Math.random() * 7}s`;
+        particle.className =
+          "main-particle";
 
-      element.style.animationDelay =
-        `${-Math.random() * 14}s`;
+        particle.textContent =
+          particleSymbols[
+            Math.floor(
+              Math.random() *
+              particleSymbols.length
+            )
+          ];
 
-      particles.appendChild(element);
+        particle.style.left =
+          `${Math.random() * 100}%`;
+
+        particle.style.fontSize =
+          `${11 + Math.random() * 8}px`;
+
+        particle.style.animationDuration =
+          `${10 + Math.random() * 7}s`;
+
+        particle.style.animationDelay =
+          `${-Math.random() * 12}s`;
+
+        fragment.appendChild(particle);
+      }
+
+      mainParticles.appendChild(fragment);
     }
 
+    createMainParticles();
 
-    /* =========================================================
+
+    /* ======================================================
        MODAL
-       ========================================================= */
+       ====================================================== */
 
     const modal =
       document.getElementById("loveModal");
 
-    const openButton =
-      document.getElementById("openLetterButton");
+    const openLetterButton =
+      document.getElementById(
+        "openLetterButton"
+      );
 
-    const finalButton =
-      document.getElementById("finalMessageButton");
+    const finalMessageButton =
+      document.getElementById(
+        "finalMessageButton"
+      );
 
-    const closeButton =
-      document.getElementById("closeModalButton");
+    const closeModalButton =
+      document.getElementById(
+        "closeModalButton"
+      );
 
 
     function openModal() {
 
-      modal.classList.add("is-open");
+      modal.classList.add("open");
 
       modal.setAttribute(
         "aria-hidden",
         "false"
       );
 
-      document.body.style.overflow =
-        "hidden";
+      document.body.classList.add(
+        "lock-scroll"
+      );
 
-      closeButton.focus();
+      /*
+        Focus after the browser has had
+        a chance to paint the modal.
+      */
+
+      requestAnimationFrame(() => {
+        closeModalButton.focus();
+      });
     }
 
 
     function closeModal() {
 
-      modal.classList.remove("is-open");
+      modal.classList.remove("open");
 
       modal.setAttribute(
         "aria-hidden",
         "true"
       );
 
-      document.body.style.overflow =
-        "";
+      document.body.classList.remove(
+        "lock-scroll"
+      );
     }
 
 
-    openButton.addEventListener(
+    openLetterButton.addEventListener(
       "click",
       openModal
     );
 
-    finalButton.addEventListener(
+    finalMessageButton.addEventListener(
       "click",
       openModal
     );
 
-    closeButton.addEventListener(
+    closeModalButton.addEventListener(
       "click",
       closeModal
     );
 
 
+    /*
+      Click outside box
+    */
+
     modal.addEventListener(
       "click",
       (event) => {
 
-        if (event.target === modal) {
-          closeModal();
-        }
-
-      }
-    );
-
-
-    document.addEventListener(
-      "keydown",
-      (event) => {
-
         if (
-          event.key === "Escape" &&
-          modal.classList.contains("is-open")
+          event.target === modal
         ) {
           closeModal();
         }
@@ -2125,9 +2511,28 @@
     );
 
 
-    /* =========================================================
+    /*
+      Escape
+    */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Escape" &&
+          modal.classList.contains("open")
+        ) {
+          closeModal();
+        }
+
+      }
+    );
+
+
+    /* ======================================================
        CLICK HEARTS
-       ========================================================= */
+       ====================================================== */
 
     document.addEventListener(
       "click",
@@ -2159,11 +2564,14 @@
         heart.style.top =
           `${event.clientY}px`;
 
-        document.body.appendChild(heart);
+        document.body.appendChild(
+          heart
+        );
 
         setTimeout(() => {
           heart.remove();
         }, 850);
+
       }
     );
   </script>
